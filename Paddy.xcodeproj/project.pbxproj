@@ -7,15 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A80545F0230A400500A964B1 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80545EF230A400500A964B1 /* Property.swift */; };
 		A8A834522309D85700A945AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A834512309D85700A945AC /* AppDelegate.swift */; };
 		A8A834542309D85700A945AC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A834532309D85700A945AC /* ViewController.swift */; };
 		A8A834572309D85800A945AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8A834552309D85800A945AC /* Main.storyboard */; };
 		A8A834592309D86400A945AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8A834582309D86400A945AC /* Assets.xcassets */; };
 		A8A8345C2309D86400A945AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8A8345A2309D86400A945AC /* LaunchScreen.storyboard */; };
-		A8A834692309DC8900A945AC /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A834682309DC8900A945AC /* Property.swift */; };
+		A8A834692309DC8900A945AC /* PropertyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A834682309DC8900A945AC /* PropertyJSON.swift */; };
+		A8E46E5E2309E56F000A8467 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E46E5D2309E56F000A8467 /* WebService.swift */; };
+		A8E46E602309EA4D000A8467 /* PropertyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E46E5F2309EA4D000A8467 /* PropertyStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A80545EF230A400500A964B1 /* Property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
 		A8A8344E2309D85700A945AC /* Paddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Paddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8A834512309D85700A945AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A8A834532309D85700A945AC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -23,7 +27,9 @@
 		A8A834582309D86400A945AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A8A8345B2309D86400A945AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A8A8345D2309D86400A945AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A8A834682309DC8900A945AC /* Property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
+		A8A834682309DC8900A945AC /* PropertyJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyJSON.swift; sourceTree = "<group>"; };
+		A8E46E5D2309E56F000A8467 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
+		A8E46E5F2309EA4D000A8467 /* PropertyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +101,8 @@
 		A8A834662309DA7400A945AC /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A8A834682309DC8900A945AC /* Property.swift */,
+				A8A834682309DC8900A945AC /* PropertyJSON.swift */,
+				A80545EF230A400500A964B1 /* Property.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -103,6 +110,8 @@
 		A8A834672309DA7A00A945AC /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				A8E46E5D2309E56F000A8467 /* WebService.swift */,
+				A8E46E5F2309EA4D000A8467 /* PropertyStore.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -178,8 +187,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A8A834692309DC8900A945AC /* Property.swift in Sources */,
+				A80545F0230A400500A964B1 /* Property.swift in Sources */,
+				A8E46E602309EA4D000A8467 /* PropertyStore.swift in Sources */,
+				A8A834692309DC8900A945AC /* PropertyJSON.swift in Sources */,
 				A8A834542309D85700A945AC /* ViewController.swift in Sources */,
+				A8E46E5E2309E56F000A8467 /* WebService.swift in Sources */,
 				A8A834522309D85700A945AC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
