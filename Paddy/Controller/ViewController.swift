@@ -9,6 +9,8 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    let propertyStore = PropertyStore()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,13 +18,10 @@ class ViewController: UIViewController {
     }
     
     private func downloadProperties() {
-        PropertyStore.shared.downloadProperties { result in
+        propertyStore.downloadProperties { result, cities in
             switch result {
-            case let .success(jsons):
-                for json in jsons {
-                    let property = Property(propertyJSON: json)
-                    print("PROP: \(property.propertyJSON?.lender)")
-                }
+            case .success(_):
+                print(cities)
             case let .failure(error):
                 print("ERROR: \(error)")
             }

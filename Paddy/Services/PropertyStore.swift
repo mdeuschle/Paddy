@@ -8,21 +8,21 @@
 
 import Foundation
 
-struct PropertyStore {
-    private init() {}
-    static let shared = PropertyStore()
-    func downloadProperties(completion: @escaping (Result<[PropertyJSON], Error>) -> Void) {
+class PropertyStore {
+    func downloadProperties(completion: @escaping ((Result<[Property], Error>), ([String]?)) -> Void) {
         WebService.shared.dataTask { result in
             switch result {
             case let .success(data):
                 do {
-                    let properties = try JSONDecoder().decode([PropertyJSON].self, from: data)
-                    completion(.success(properties))
+                    let properties = try JSONDecoder().decode([Property].self, from: data)
+                    let citiesArray = properties.compactMap { $0.propertycity }
+                    let cities = Array(Set(citiesArray)).sorted()
+                    completion(.success(properties), cities)
                 } catch {
-                    completion(.failure(error))
+                    completion(.failure(error), nil)
                 }
             case let .failure(error):
-                completion(.failure(error))
+                completion(.failure(error), nil)
             }
         }
     }

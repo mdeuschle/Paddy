@@ -8,28 +8,21 @@
 
 import Foundation
 
-struct Property {
-    let propertyJSON: PropertyJSON?
-    private(set) var address = ""
-    private(set) var city = ""
-    private(set) var state = ""
-    private(set) var zip = ""
+struct Property: Decodable {
     
-    init(propertyJSON: PropertyJSON) {
-        self.propertyJSON = propertyJSON
-        if let data = propertyJSON.property_location?.human_address?.data(using: .utf8) {
-            do {
-                if let addressDictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String: String] {
-                    address = addressDictionary["address"] ?? ""
-                    city = addressDictionary["city"] ?? ""
-                    state = addressDictionary["state"] ?? ""
-                    zip = addressDictionary["zip"] ?? ""
-                }
-            } catch {
-                print("ERR: \(error)")
-            }
-        }
-    }
+    let apn: String?
+    let registered_date: String?
+    let property_type: String?
+    let propertyaddress: String?
+    let propertycity: String?
+    let propertystate: String?
+    let propertyzip: String?
+    let councildistrict: String?
+    let lender: String?
+    let lendercontact: String?
+    let lendercontactphone: String?
+    let lon: String?
+    let lat: String?
 }
 
 
