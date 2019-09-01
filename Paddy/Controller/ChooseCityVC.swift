@@ -11,6 +11,7 @@ import UIKit
 class ChooseCityVC: UIViewController {
     
     let propertyStore = PropertyStore()
+    private var chooseCityTextField = ChooseCityTextField()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,9 @@ class ChooseCityVC: UIViewController {
         let pickerLabel = HeaderLabel()
         view.addSubview(pickerLabel)
         pickerLabel.configure(with: "Choose City", view: view)
+        view.addSubview(chooseCityTextField)
+        chooseCityTextField.configure(view: pickerLabel)
+        chooseCityTextField.text = "Los Angeles"
     }
     
     private func downloadProperties() {

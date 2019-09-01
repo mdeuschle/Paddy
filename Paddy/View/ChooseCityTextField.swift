@@ -18,16 +18,28 @@ class ChooseCityTextField: UITextField {
         super.init(coder: aDecoder)
     }
     
-    
-    
-
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    func configure(view: UIView) {
+        translatesAutoresizingMaskIntoConstraints = false
+        font = UIFont.preferredFont(forTextStyle: .title3)
+        adjustsFontForContentSizeCategory = true
+        NSLayoutConstraint.activate([
+            topAnchor.constraint(equalTo: view.bottomAnchor, constant: 12),
+            leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            heightAnchor.constraint(equalToConstant: font?.lineHeight ?? 44 + 24)
+        ])
     }
-    */
-
+    
+    
+    
+    
+    
+    /*
+     // Only override draw() if you perform custom drawing.
+     // An empty implementation adversely affects performance during animation.
+     override func draw(_ rect: CGRect) {
+     // Drawing code
+     }
+     */
+    
 }
