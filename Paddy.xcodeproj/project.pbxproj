@@ -15,6 +15,7 @@
 		A8A834592309D86400A945AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8A834582309D86400A945AC /* Assets.xcassets */; };
 		A8A8345C2309D86400A945AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8A8345A2309D86400A945AC /* LaunchScreen.storyboard */; };
 		A8DA5E6A231C4B45005F2F44 /* ChooseCityTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DA5E69231C4B45005F2F44 /* ChooseCityTextField.swift */; };
+		A8DA5E6C231C5B3C005F2F44 /* CityPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DA5E6B231C5B3C005F2F44 /* CityPickerView.swift */; };
 		A8E46E5E2309E56F000A8467 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E46E5D2309E56F000A8467 /* WebService.swift */; };
 		A8E46E602309EA4D000A8467 /* PropertyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E46E5F2309EA4D000A8467 /* PropertyStore.swift */; };
 /* End PBXBuildFile section */
@@ -30,6 +31,7 @@
 		A8A8345B2309D86400A945AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A8A8345D2309D86400A945AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8DA5E69231C4B45005F2F44 /* ChooseCityTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCityTextField.swift; sourceTree = "<group>"; };
+		A8DA5E6B231C5B3C005F2F44 /* CityPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityPickerView.swift; sourceTree = "<group>"; };
 		A8E46E5D2309E56F000A8467 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		A8E46E5F2309EA4D000A8467 /* PropertyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,6 +100,7 @@
 				A8A834552309D85800A945AC /* Main.storyboard */,
 				A88E409B231C3F5D00913935 /* HeaderLabel.swift */,
 				A8DA5E69231C4B45005F2F44 /* ChooseCityTextField.swift */,
+				A8DA5E6B231C5B3C005F2F44 /* CityPickerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A88E409A231C3E6000913935 /* ChooseCityVC.swift in Sources */,
+				A8DA5E6C231C5B3C005F2F44 /* CityPickerView.swift in Sources */,
 				A88E409C231C3F5D00913935 /* HeaderLabel.swift in Sources */,
 				A80545F0230A400500A964B1 /* Property.swift in Sources */,
 				A8DA5E6A231C4B45005F2F44 /* ChooseCityTextField.swift in Sources */,
