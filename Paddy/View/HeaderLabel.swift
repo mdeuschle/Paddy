@@ -20,7 +20,7 @@ class HeaderLabel: UILabel {
     
     func configure(with message: String, view: UIView) {
         text = message
-        font = UIFont.preferredFont(forTextStyle: .headline)
+        font = UIFont.preferredFont(forTextStyle: .title3)
         textAlignment = .left
         adjustsFontForContentSizeCategory = true
         numberOfLines = 0

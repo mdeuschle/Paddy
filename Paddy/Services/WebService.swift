@@ -20,11 +20,13 @@ struct WebService {
             return
         }
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
-            if data != nil && error == nil {
-                completion(.success(data!))
-            } else {
-                if data != nil {
-                    completion(.failure(error!))
+            DispatchQueue.main.async {
+                if data != nil && error == nil {
+                    completion(.success(data!))
+                } else {
+                    if data != nil {
+                        completion(.failure(error!))
+                    }
                 }
             }
         }

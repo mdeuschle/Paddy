@@ -20,7 +20,7 @@ class ChooseCityTextField: UITextField {
     
     func configure(view: UIView) {
         translatesAutoresizingMaskIntoConstraints = false
-        font = UIFont.preferredFont(forTextStyle: .title3)
+        font = UIFont.preferredFont(forTextStyle: .largeTitle)
         adjustsFontForContentSizeCategory = true
         NSLayoutConstraint.activate([
             topAnchor.constraint(equalTo: view.bottomAnchor, constant: 12),

@@ -10,10 +10,18 @@ import UIKit
 
 class ChooseCityVC: UIViewController {
     
+    let spinner = UIActivityIndicatorView(style: .gray)
     let propertyStore = PropertyStore()
+    private var rowHeight: CGFloat = 46
+    let pickerView = UIPickerView()
     private var chooseCityTextField = ChooseCityTextField()
-    let cities = ["Los Angeles", "Van Nuys", "Chicago"]
-    private var rowHeight: CGFloat = 8
+    var properties = [Property]()
+    var cities = [String]() {
+        didSet {
+            pickerView.reloadAllComponents()
+            chooseCityTextField.text = cities.first?.capitalized
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,22 +32,36 @@ class ChooseCityVC: UIViewController {
     private func setUpUI() {
         title = "Paddy"
         navigationController?.navigationBar.prefersLargeTitles = true
+        spinner.center = view.center
+        view.addSubview(spinner)
+        spinner.startAnimating()
         let pickerLabel = HeaderLabel()
         view.addSubview(pickerLabel)
         pickerLabel.configure(with: "Choose City", view: view)
         view.addSubview(chooseCityTextField)
         chooseCityTextField.configure(view: pickerLabel)
-        chooseCityTextField.text = "Los Angeles"
-        let pickerView = UIPickerView()
         pickerView.delegate = self
         chooseCityTextField.inputView = pickerView
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
+        toolbar.setItems([flexibleSpace, doneButton], animated: false)
+        chooseCityTextField.inputAccessoryView = toolbar
+    }
+    
+    @objc private func doneButtonTapped() {
+        chooseCityTextField.resignFirstResponder()
+        print("TAP")
     }
     
     private func downloadProperties() {
-        propertyStore.downloadProperties { result, cities in
+        propertyStore.downloadProperties { [unowned self] result, cities in
+            self.spinner.stopAnimating()
             switch result {
-            case .success(_):
-                print(cities)
+            case let .success(properties):
+                self.cities = cities ?? [String]()
+                self.properties = properties
             case let .failure(error):
                 print("ERROR: \(error)")
             }
@@ -56,25 +78,21 @@ extension ChooseCityVC: UIPickerViewDelegate, UIPickerViewDataSource {
         return cities.count
     }
     
-//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        return cities[row]
-//    }
-    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        chooseCityTextField.text = cities[row]
+        chooseCityTextField.text = cities[row].capitalized
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         var label = UILabel()
         if let _view = view { label = _view as! UILabel }
-        label.font = UIFont.preferredFont(forTextStyle: .headline)
+        label.font = UIFont.preferredFont(forTextStyle: .title1)
         label.adjustsFontForContentSizeCategory = true
-        label.text = cities[row]
+        label.text = cities[row].capitalized
         label.textAlignment = .center
         rowHeight = label.font.lineHeight
         return label
     }
-//
+
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         return rowHeight
     }
