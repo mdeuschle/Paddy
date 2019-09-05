@@ -22,6 +22,7 @@ class ChooseCityVC: UIViewController {
             chooseCityTextField.text = cities.first?.capitalized
         }
     }
+    private(set) var selectedCity = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,16 +53,21 @@ class ChooseCityVC: UIViewController {
     
     @objc private func doneButtonTapped() {
         chooseCityTextField.resignFirstResponder()
+        let mapVC = MapVC(nibName: nil, bundle: nil)
+        mapVC.title = selectedCity
+        mapVC.properties = properties.filter { $0.propertycity == selectedCity }
+        navigationController?.pushViewController(mapVC, animated: true)
         print("TAP")
     }
     
     private func downloadProperties() {
-        propertyStore.downloadProperties { [unowned self] result, cities in
-            self.spinner.stopAnimating()
+        propertyStore.downloadProperties { [weak self] result, cities in
+            self?.spinner.stopAnimating()
             switch result {
             case let .success(properties):
-                self.cities = cities ?? [String]()
-                self.properties = properties
+                self?.cities = cities ?? [String]()
+                self?.properties = properties
+                self?.selectedCity = cities?.first ?? ""
             case let .failure(error):
                 print("ERROR: \(error)")
             }
@@ -79,15 +85,18 @@ extension ChooseCityVC: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        chooseCityTextField.text = cities[row].capitalized
+        let city = cities[row]
+        selectedCity = city
+        chooseCityTextField.text = city.capitalized
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         var label = UILabel()
         if let _view = view { label = _view as! UILabel }
+        let city = cities[row]
         label.font = UIFont.preferredFont(forTextStyle: .title1)
         label.adjustsFontForContentSizeCategory = true
-        label.text = cities[row].capitalized
+        label.text = city.capitalized
         label.textAlignment = .center
         rowHeight = label.font.lineHeight
         return label
