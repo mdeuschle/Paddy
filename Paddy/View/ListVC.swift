@@ -9,15 +9,32 @@
 import UIKit
 
 class ListVC: UITableViewController {
+    
+    
+    let mapButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: 20, y: 20, width: 60, height: 44))
+        button.backgroundColor = .blue
+        button.setTitle("Map", for: .normal)
+        return button
+    }()
+
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        mapButton.addTarget(self, action: #selector(mapButtonTapped(_:)), for: .touchUpInside)
+        
+        view.addSubview(mapButton)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    @objc private func mapButtonTapped(_ sender: UIButton) {
+        dismiss(animated: true)
     }
 
     // MARK: - Table view data source

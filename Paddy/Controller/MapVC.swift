@@ -19,7 +19,7 @@ class MapVC: UIViewController {
     
     @IBAction func buttonTapped(_ sender: UIButton) {
         let listVC = ListVC(nibName: nil, bundle: nil)
-        listVC.modalTransitionStyle = .flipHorizontal
-        present(listVC, animated: true)
+        navigationController?.pushViewController(listVC, animated: true)
+//        present(listVC, animated: true)
     }
 }
