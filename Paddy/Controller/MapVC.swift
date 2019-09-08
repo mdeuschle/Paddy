@@ -11,15 +11,44 @@ import UIKit
 class MapVC: UIViewController {
     
     var properties = [Property]()
+    
+    let mapListViewButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("List", for: .normal)
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpUI()
+
 
     }
     
-    @IBAction func buttonTapped(_ sender: UIButton) {
+    @objc func mapListViewButtonTapped(_ sender: UIButton) {
+        print("TAP: \(sender.title)")
         let listVC = ListVC(nibName: nil, bundle: nil)
-        navigationController?.pushViewController(listVC, animated: true)
-//        present(listVC, animated: true)
+        let guide = view.safeAreaLayoutGuide
+        view.addSubview(listVC.view)
+        listVC.view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            listVC.view.topAnchor.constraint(equalTo: guide.topAnchor),
+            listVC.view.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
+            listVC.view.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
+            listVC.view.bottomAnchor.constraint(equalTo: guide.bottomAnchor),
+            ])
+    }
+    
+    private func setUpUI() {
+        navigationItem.largeTitleDisplayMode = .never
+        mapListViewButton.addTarget(self, action: #selector(mapListViewButtonTapped(_:)), for: .touchUpInside)
+        let barButtonItem = UIBarButtonItem(customView: mapListViewButton)
+        navigationItem.rightBarButtonItem = barButtonItem
+
+        
+    }
+    
+    @IBAction func buttonTapped(_ sender: UIButton) {
+
     }
 }

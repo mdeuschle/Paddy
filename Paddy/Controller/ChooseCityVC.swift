@@ -33,6 +33,7 @@ class ChooseCityVC: UIViewController {
     private func setUpUI() {
         title = "Paddy"
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .always
         spinner.center = view.center
         view.addSubview(spinner)
         spinner.startAnimating()
@@ -57,7 +58,6 @@ class ChooseCityVC: UIViewController {
         mapVC.title = selectedCity
         mapVC.properties = properties.filter { $0.propertycity == selectedCity }
         navigationController?.pushViewController(mapVC, animated: true)
-        print("TAP")
     }
     
     private func downloadProperties() {
