@@ -26,17 +26,8 @@ class MapVC: UIViewController {
     }
     
     @objc func mapListViewButtonTapped(_ sender: UIButton) {
-        print("TAP: \(sender.title)")
-        let listVC = ListVC(nibName: nil, bundle: nil)
-        let guide = view.safeAreaLayoutGuide
-        view.addSubview(listVC.view)
-        listVC.view.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            listVC.view.topAnchor.constraint(equalTo: guide.topAnchor),
-            listVC.view.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
-            listVC.view.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
-            listVC.view.bottomAnchor.constraint(equalTo: guide.bottomAnchor),
-            ])
+        transitionViews()
+
     }
     
     private func setUpUI() {
@@ -44,8 +35,47 @@ class MapVC: UIViewController {
         mapListViewButton.addTarget(self, action: #selector(mapListViewButtonTapped(_:)), for: .touchUpInside)
         let barButtonItem = UIBarButtonItem(customView: mapListViewButton)
         navigationItem.rightBarButtonItem = barButtonItem
-
-        
+    }
+    
+    private func transitionViews() {
+        mapListViewButton.titleLabel?.text == "List" ? showMapView() : showListView()
+    }
+    
+    private func showListView() {
+        let listVC = ListVC(nibName: nil, bundle: nil)
+        listVC.view.tag = 99
+        UIView.transition(with: view,
+                          duration: 0.4,
+                          options: [.transitionCurlUp, .curveEaseIn],
+                          animations: {
+                            self.view.addSubview(listVC.view)
+                            let guide = self.view.safeAreaLayoutGuide
+                            listVC.view.translatesAutoresizingMaskIntoConstraints = false
+                            NSLayoutConstraint.activate([
+                                listVC.view.topAnchor.constraint(equalTo: guide.topAnchor),
+                                listVC.view.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
+                                listVC.view.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
+                                listVC.view.bottomAnchor.constraint(equalTo: guide.bottomAnchor),
+                                ])
+                            self.configureButtonTitle()
+        }, completion: nil)
+    }
+    
+    private func showMapView() {
+        UIView.transition(with: view,
+                          duration: 0.4,
+                          options: [.transitionCurlDown, .curveEaseIn],
+                          animations: {
+                            if let listView = self.view.viewWithTag(99) {
+                                listView.removeFromSuperview()
+                            }
+                            self.configureButtonTitle()
+        }, completion: nil)
+    }
+    
+    private func configureButtonTitle() {
+        let buttonTitle = mapListViewButton.titleLabel?.text == "List" ? "Map" : "List"
+        mapListViewButton.setTitle(buttonTitle, for: .normal)
     }
     
     @IBAction func buttonTapped(_ sender: UIButton) {
