@@ -40,6 +40,7 @@ class MapVC: UIViewController {
     
     private func showListView() {
         let listVC = ListVC(nibName: nil, bundle: nil)
+        listVC.properties = properties
         listVC.view.tag = 99
         UIView.transition(with: view,
                           duration: 0.4,
