@@ -33,6 +33,10 @@ class ChooseCityVC: UIViewController {
     private func setUpUI() {
         title = "Paddy"
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "",
+                                                           style: .plain,
+                                                           target: nil,
+                                                           action: nil)
         navigationItem.largeTitleDisplayMode = .always
         spinner.center = view.center
         view.addSubview(spinner)

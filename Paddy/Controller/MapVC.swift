@@ -21,13 +21,10 @@ class MapVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
-
-
     }
     
     @objc func mapListViewButtonTapped(_ sender: UIButton) {
         transitionViews()
-
     }
     
     private func setUpUI() {
@@ -38,7 +35,7 @@ class MapVC: UIViewController {
     }
     
     private func transitionViews() {
-        mapListViewButton.titleLabel?.text == "List" ? showMapView() : showListView()
+        mapListViewButton.titleLabel?.text == "List" ? showListView() : showMapView()
     }
     
     private func showListView() {
@@ -76,9 +73,5 @@ class MapVC: UIViewController {
     private func configureButtonTitle() {
         let buttonTitle = mapListViewButton.titleLabel?.text == "List" ? "Map" : "List"
         mapListViewButton.setTitle(buttonTitle, for: .normal)
-    }
-    
-    @IBAction func buttonTapped(_ sender: UIButton) {
-
     }
 }
