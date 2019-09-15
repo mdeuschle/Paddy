@@ -17,10 +17,15 @@ class MapVC: UIViewController {
         button.setTitle("List", for: .normal)
         return button
     }()
+    
+    let tableView: UITableView = {
+        return UITableView()
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
+        tableView.dataSource = self
     }
     
     @objc func mapListViewButtonTapped(_ sender: UIButton) {
@@ -39,21 +44,18 @@ class MapVC: UIViewController {
     }
     
     private func showListView() {
-        let listVC = ListVC(nibName: nil, bundle: nil)
-        listVC.properties = properties
-        listVC.view.tag = 99
         UIView.transition(with: view,
                           duration: 0.4,
                           options: [.transitionCurlUp, .curveEaseIn],
                           animations: {
-                            self.view.addSubview(listVC.view)
+                            self.view.addSubview(self.tableView)
                             let guide = self.view.safeAreaLayoutGuide
-                            listVC.view.translatesAutoresizingMaskIntoConstraints = false
+                            self.tableView.translatesAutoresizingMaskIntoConstraints = false
                             NSLayoutConstraint.activate([
-                                listVC.view.topAnchor.constraint(equalTo: guide.topAnchor),
-                                listVC.view.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
-                                listVC.view.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
-                                listVC.view.bottomAnchor.constraint(equalTo: guide.bottomAnchor),
+                                self.tableView.topAnchor.constraint(equalTo: guide.topAnchor),
+                                self.tableView.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
+                                self.tableView.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
+                                self.tableView.bottomAnchor.constraint(equalTo: guide.bottomAnchor),
                                 ])
                             self.configureButtonTitle()
         }, completion: nil)
@@ -64,9 +66,7 @@ class MapVC: UIViewController {
                           duration: 0.4,
                           options: [.transitionCurlDown, .curveEaseIn],
                           animations: {
-                            if let listView = self.view.viewWithTag(99) {
-                                listView.removeFromSuperview()
-                            }
+                            self.tableView.removeFromSuperview()
                             self.configureButtonTitle()
         }, completion: nil)
     }
@@ -75,4 +75,19 @@ class MapVC: UIViewController {
         let buttonTitle = mapListViewButton.titleLabel?.text == "List" ? "Map" : "List"
         mapListViewButton.setTitle(buttonTitle, for: .normal)
     }
+}
+
+extension MapVC: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return properties.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        let property = properties[indexPath.row]
+        cell.textLabel?.text = property.propertyaddress
+        return cell
+    }
+    
 }
