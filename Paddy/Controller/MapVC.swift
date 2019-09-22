@@ -32,10 +32,17 @@ class MapVC: UIViewController {
         configureLocationServices()
         setUpUI()
         tableView.dataSource = self
+        configureRightBarButtonItem()
+        centerMapOnLocation()
     }
     
     @objc func mapListViewButtonTapped(_ sender: UIButton) {
         transitionViews()
+    }
+    
+    private func configureRightBarButtonItem() {
+        let locationButton = MKUserTrackingBarButtonItem(mapView: mapView)
+        navigationItem.rightBarButtonItem = locationButton
     }
     
     private func configureLocationServices() {
@@ -110,4 +117,23 @@ extension MapVC: UITableViewDataSource {
 
 extension MapVC: CLLocationManagerDelegate {
     
+
 }
+
+extension MapVC: MKMapViewDelegate {
+    
+    private func centerMapOnLocation() {
+        guard let property = properties.first,
+            let latitude = property.lat,
+            let longitude = property.lon,
+        let lat = Double(latitude),
+        let lon = Double(longitude) else { return }
+        let locationCoordinate = CLLocationCoordinate2DMake(lat, lon)
+        let coordinateRegion = MKCoordinateRegion(center: locationCoordinate,
+                                                  latitudinalMeters: 5000,
+                                                  longitudinalMeters: 5000)
+        mapView.setRegion(coordinateRegion, animated: true)
+    }
+}
+
+ 
