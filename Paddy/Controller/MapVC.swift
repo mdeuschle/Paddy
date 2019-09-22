@@ -84,7 +84,7 @@ extension MapVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
         let property = properties[indexPath.row]
         cell.textLabel?.text = property.propertyaddress
         return cell

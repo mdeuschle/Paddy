@@ -22,15 +22,20 @@ class ChooseCityVC: UIViewController {
             chooseCityTextField.text = cities.first?.capitalized
         }
     }
-    private(set) var selectedCity = ""
+    private var selectedCity = ""
+    private var alertView: AlertView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         downloadProperties()
-        setUpUI()
+        setupNavigationBar()
+        setupSpinner()
+        setupPicker()
+        setupToolbar()
+        alertView = AlertView(viewController: self)
     }
     
-    private func setUpUI() {
+    private func setupNavigationBar() {
         title = "Paddy"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "",
@@ -38,9 +43,15 @@ class ChooseCityVC: UIViewController {
                                                            target: nil,
                                                            action: nil)
         navigationItem.largeTitleDisplayMode = .always
+    }
+    
+    private func setupSpinner() {
         spinner.center = view.center
         view.addSubview(spinner)
         spinner.startAnimating()
+    }
+    
+    private func setupPicker() {
         let pickerLabel = HeaderLabel()
         view.addSubview(pickerLabel)
         pickerLabel.configure(with: "Choose City", view: view)
@@ -48,6 +59,9 @@ class ChooseCityVC: UIViewController {
         chooseCityTextField.configure(view: pickerLabel)
         pickerView.delegate = self
         chooseCityTextField.inputView = pickerView
+    }
+    
+    private func setupToolbar() {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
@@ -60,10 +74,11 @@ class ChooseCityVC: UIViewController {
         chooseCityTextField.resignFirstResponder()
         let mapVC = MapVC(nibName: nil, bundle: nil)
         mapVC.title = selectedCity
-        mapVC.properties = properties.filter { $0.propertycity == selectedCity }
+        let _properties = properties.filter { $0.propertycity == selectedCity }
+        mapVC.properties = _properties.sorted { (Int($0.propertyzip ?? "") ?? 0) > (Int($1.propertyzip ?? "") ?? 0) }
         navigationController?.pushViewController(mapVC, animated: true)
     }
-    
+        
     private func downloadProperties() {
         propertyStore.downloadProperties { [weak self] result, cities in
             self?.spinner.stopAnimating()
@@ -73,7 +88,7 @@ class ChooseCityVC: UIViewController {
                 self?.properties = properties
                 self?.selectedCity = cities?.first ?? ""
             case let .failure(error):
-                print("ERROR: \(error)")
+                self?.alertView?.show(error: error.localizedDescription)
             }
         }
     }
