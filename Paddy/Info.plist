@@ -41,5 +41,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Paddy requires your location to locate nearest properties</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Paddy requires your location to locate nearest properties</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Paddy requires your location to locate nearest properties</string>
 </dict>
 </plist>

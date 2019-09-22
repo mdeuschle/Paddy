@@ -30,8 +30,8 @@ class ChooseCityVC: UIViewController {
         downloadProperties()
         setupNavigationBar()
         setupSpinner()
-        setupPicker()
         setupToolbar()
+        setupPicker()
         alertView = AlertView(viewController: self)
     }
     
@@ -62,7 +62,8 @@ class ChooseCityVC: UIViewController {
     }
     
     private func setupToolbar() {
-        let toolbar = UIToolbar()
+        let cgRect = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50)
+        let toolbar = UIToolbar(frame: cgRect)
         toolbar.sizeToFit()
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))

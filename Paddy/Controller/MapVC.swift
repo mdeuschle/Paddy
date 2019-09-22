@@ -7,10 +7,15 @@
 //
 
 import UIKit
+import MapKit
+import CoreLocation
 
 class MapVC: UIViewController {
     
+    @IBOutlet weak var mapView: MKMapView!
+    
     var properties = [Property]()
+    let locationManager = CLLocationManager()
     
     let mapListViewButton: UIButton = {
         let button = UIButton(type: .system)
@@ -24,12 +29,24 @@ class MapVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureLocationServices()
         setUpUI()
         tableView.dataSource = self
     }
     
     @objc func mapListViewButtonTapped(_ sender: UIButton) {
         transitionViews()
+    }
+    
+    private func configureLocationServices() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+        locationManager.startUpdatingLocation()
+        if CLLocationManager.authorizationStatus() == .notDetermined {
+            locationManager.requestWhenInUseAuthorization()
+        } else {
+            return
+        }
     }
     
     private func setUpUI() {
@@ -89,5 +106,8 @@ extension MapVC: UITableViewDataSource {
         cell.textLabel?.text = property.propertyaddress
         return cell
     }
+}
+
+extension MapVC: CLLocationManagerDelegate {
     
 }
