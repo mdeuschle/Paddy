@@ -38,7 +38,7 @@ class ChooseCityVC: UIViewController {
     private func setupNavigationBar() {
         title = "Paddy"
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "",
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Choose city",
                                                            style: .plain,
                                                            target: nil,
                                                            action: nil)

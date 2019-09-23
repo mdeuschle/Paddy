@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 struct Property: Decodable {
     
@@ -23,6 +24,14 @@ struct Property: Decodable {
     let lendercontactphone: String?
     let lon: String?
     let lat: String?
+    
+    var locationCoordinate: CLLocationCoordinate2D? {
+        guard let latitude = lat,
+            let longitude = lon,
+            let lat = Double(latitude),
+            let lon = Double(longitude) else { return nil }
+        return CLLocationCoordinate2DMake(lat, lon)
+    }
 }
 
 
