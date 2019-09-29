@@ -1,24 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14865.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uwM-Wh-32Z">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uwM-Wh-32Z">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14819.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Choose CityVC-->
+        <!--MapVC-->
         <scene sceneID="f5D-17-tXS">
             <objects>
-                <viewController id="2hM-Ks-AYG" customClass="ChooseCityVC" customModule="Paddy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="2hM-Ks-AYG" customClass="MapVC" customModule="Paddy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JT0-72-RNs">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="wTF-Sz-p4Q">
+                                <rect key="frame" x="0.0" y="140" width="414" height="722"/>
+                                <connections>
+                                    <outlet property="delegate" destination="2hM-Ks-AYG" id="s57-nm-Nmn"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="wTF-Sz-p4Q" firstAttribute="leading" secondItem="855-fO-lZe" secondAttribute="leading" id="IEK-rM-5ny"/>
+                            <constraint firstItem="855-fO-lZe" firstAttribute="trailing" secondItem="wTF-Sz-p4Q" secondAttribute="trailing" id="QdP-H0-cgc"/>
+                            <constraint firstItem="855-fO-lZe" firstAttribute="bottom" secondItem="wTF-Sz-p4Q" secondAttribute="bottom" id="aG0-5l-cqe"/>
+                            <constraint firstItem="wTF-Sz-p4Q" firstAttribute="top" secondItem="855-fO-lZe" secondAttribute="top" id="n93-Km-Hd3"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="855-fO-lZe"/>
                     </view>
                     <navigationItem key="navigationItem" id="sw0-Ik-D4f"/>
+                    <connections>
+                        <outlet property="mapView" destination="wTF-Sz-p4Q" id="qAu-Mq-eSO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RfE-NM-xEZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -29,8 +46,8 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uwM-Wh-32Z" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Mdz-9u-TWG">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Mdz-9u-TWG">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

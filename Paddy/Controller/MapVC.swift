@@ -14,8 +14,27 @@ class MapVC: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     
+    let spinner = UIActivityIndicatorView(style: .gray)
+    let propertyStore = PropertyStore()
     var properties = [Property]()
     let locationManager = CLLocationManager()
+    let pickerView = UIPickerView()
+    var cities = [String]() {
+        didSet {
+            centerMapOnLocation()
+            dropPins()
+            pickerView.reloadAllComponents()
+//            chooseCityTextField.text = cities.first?.capitalized
+        }
+    }
+    private var selectedCity = "Los Angeles"
+    private var alertView: AlertView!
+    
+    let selectCityButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Select city", for: .normal)
+        return button
+    }()
     
     let mapListViewButton: UIButton = {
         let button = UIButton(type: .system)
@@ -29,14 +48,24 @@ class MapVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupSpinner()
         configureLocationServices()
         setUpUI()
+        downloadProperties()
         tableView.dataSource = self
-        centerMapOnLocation()
-        dropPins()
     }
     
-    @objc func mapListViewButtonTapped(_ sender: UIButton) {
+    private func setupSpinner() {
+        spinner.center = view.center
+        view.addSubview(spinner)
+        spinner.startAnimating()
+    }
+    
+    @objc private func selectCityButtonTapped(_ sender: UIButton) {
+        print("CITY TAP")
+    }
+    
+    @objc private func mapListViewButtonTapped(_ sender: UIButton) {
         transitionViews()
     }
     
@@ -51,12 +80,30 @@ class MapVC: UIViewController {
         }
     }
     
+    private func downloadProperties() {
+        propertyStore.downloadProperties { [weak self] result, cities in
+            self?.spinner.stopAnimating()
+            switch result {
+            case let .success(properties):
+                let _properties = properties.filter { $0.propertyaddress != nil }
+                self?.properties = _properties
+                self?.cities = cities ?? [String]()
+//                self?.selectedCity = cities?.first ?? ""
+            case let .failure(error):
+                self?.alertView?.show(error: error.localizedDescription)
+            }
+        }
+    }
+    
     private func setUpUI() {
-        navigationItem.largeTitleDisplayMode = .never
+        title = selectedCity
+        selectCityButton.addTarget(self, action: #selector(selectCityButtonTapped(_:)), for: .touchUpInside)
         mapListViewButton.addTarget(self, action: #selector(mapListViewButtonTapped(_:)), for: .touchUpInside)
         let mapListButton = UIBarButtonItem(customView: mapListViewButton)
         let locationButton = MKUserTrackingBarButtonItem(mapView: mapView)
         navigationItem.rightBarButtonItems = [locationButton, mapListButton]
+        let selectCityButtonItem = UIBarButtonItem(customView: selectCityButton)
+        navigationItem.leftBarButtonItem = selectCityButtonItem
     }
     
     private func transitionViews() {
@@ -115,6 +162,7 @@ extension MapVC: UITableViewDataSource {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
         let property = properties[indexPath.row]
         cell.textLabel?.text = property.propertyaddress
+        cell.detailTextLabel?.text = property.propertyzip
         return cell
     }
 }

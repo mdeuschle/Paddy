@@ -15,9 +15,10 @@ class PropertyStore {
             case let .success(data):
                 do {
                     let properties = try JSONDecoder().decode([Property].self, from: data)
+                    let sortedProperties = properties.sorted { $0.propertyaddress ?? "" < $1.propertyaddress ?? "" }
                     let citiesArray = properties.compactMap { $0.propertycity }
                     let cities = Array(Set(citiesArray)).sorted()
-                    completion(.success(properties), cities)
+                    completion(.success(sortedProperties), cities)
                 } catch {
                     completion(.failure(error), nil)
                 }
