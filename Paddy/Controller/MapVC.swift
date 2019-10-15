@@ -10,24 +10,29 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class MapVC: UIViewController {
+final class MapVC: UIViewController {
     
-    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet var mapView: MKMapView!
+    @IBOutlet var searchVCHeight: NSLayoutConstraint!
     
     let spinner = UIActivityIndicatorView(style: .gray)
     let propertyStore = PropertyStore()
-    var properties = [Property]()
-    let locationManager = CLLocationManager()
-    let pickerView = UIPickerView()
-    var cities = [String]() {
+    var properties = [Property]() {
         didSet {
+            print(properties)
             centerMapOnLocation()
             dropPins()
-            pickerView.reloadAllComponents()
-//            chooseCityTextField.text = cities.first?.capitalized
+            searchVC?.properties = properties
         }
     }
-    private var selectedCity = "Los Angeles"
+    var cities = [String]()
+    let locationManager = CLLocationManager()
+    private var searchVC: SearchVC?
+    private var selectedCity = "LOS ANGELES" {
+        didSet {
+            title = selectedCity
+        }
+    }
     private var alertView: AlertView!
     
     let selectCityButton: UIButton = {
@@ -53,6 +58,45 @@ class MapVC: UIViewController {
         setUpUI()
         downloadProperties()
         tableView.dataSource = self
+        setupSearchVC()
+        setupSwipeGestureRecognizers()
+    }
+    
+    private func setupSearchVC() {
+        if let searchVC = children.last as? SearchVC { self.searchVC = searchVC }
+        searchVC?.delegate = self
+        searchVCHeight.constant = 0
+        UIView.animate(withDuration: 0.25) { [weak self] in
+            self?.searchVCHeight.constant = (self?.view.bounds.height ?? 60) / 3.5
+            self?.view.layoutIfNeeded()
+        }
+    }
+    
+    private func setupSwipeGestureRecognizers() {
+        let swipeUpGesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeUp))
+        swipeUpGesture.direction = .up
+        searchVC?.view.addGestureRecognizer(swipeUpGesture)
+        let swipeDownGesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeDown))
+        swipeDownGesture.direction = .down
+        searchVC?.view.addGestureRecognizer(swipeDownGesture)
+    }
+    
+    @objc private func swipeUp() {
+        UIView.animate(withDuration: 0.25) { [weak self] in
+            self?.searchVCHeight.constant = (self?.view.bounds.height ?? 60) / 1.18
+            self?.view.layoutIfNeeded()
+        }
+    }
+    
+    @objc private func swipeDown() {
+        dismissSearchVC()
+    }
+    
+    private func dismissSearchVC() {
+        UIView.animate(withDuration: 0.25) { [weak self] in
+            self?.searchVCHeight.constant = (self?.view.bounds.height ?? 60) / 3.5
+            self?.view.layoutIfNeeded()
+        }
     }
     
     private func setupSpinner() {
@@ -61,7 +105,14 @@ class MapVC: UIViewController {
         spinner.startAnimating()
     }
     
+    private func loadSearchVC() {
+        let searchVC = SearchVC(nibName: nil, bundle: nil)
+        searchVC.properties = properties
+        present(searchVC, animated: true, completion: nil)
+    }
+    
     @objc private func selectCityButtonTapped(_ sender: UIButton) {
+        loadSearchVC()
         print("CITY TAP")
     }
     
@@ -79,16 +130,19 @@ class MapVC: UIViewController {
             return
         }
     }
-    
+        
     private func downloadProperties() {
-        propertyStore.downloadProperties { [weak self] result, cities in
+        propertyStore.downloadProperties { [weak self] result in
             self?.spinner.stopAnimating()
             switch result {
             case let .success(properties):
-                let _properties = properties.filter { $0.propertyaddress != nil }
-                self?.properties = _properties
-                self?.cities = cities ?? [String]()
-//                self?.selectedCity = cities?.first ?? ""
+                let properties = properties.filter { $0.propertyaddress != nil }
+                self?.properties = properties
+                self?.searchVC?.properties = properties
+                let citiesArray = properties.compactMap { $0.propertycity }
+                let cities = Array(Set(citiesArray)).sorted().filter { !$0.contains("APN") }
+                self?.cities = cities
+                self?.searchVC?.cities = cities
             case let .failure(error):
                 self?.alertView?.show(error: error.localizedDescription)
             }
@@ -96,7 +150,8 @@ class MapVC: UIViewController {
     }
     
     private func setUpUI() {
-        title = selectedCity
+        title = "LOS ANGELES"
+        definesPresentationContext = true
         selectCityButton.addTarget(self, action: #selector(selectCityButtonTapped(_:)), for: .touchUpInside)
         mapListViewButton.addTarget(self, action: #selector(mapListViewButtonTapped(_:)), for: .touchUpInside)
         let mapListButton = UIBarButtonItem(customView: mapListViewButton)
@@ -175,12 +230,16 @@ extension MapVC: CLLocationManagerDelegate {
 extension MapVC: MKMapViewDelegate {
     
     private func centerMapOnLocation() {
-        guard let property = properties.first,
-            let locationCoordinate = property.locationCoordinate else { return }
-        let coordinateRegion = MKCoordinateRegion(center: locationCoordinate,
-                                                  latitudinalMeters: 5000,
-                                                  longitudinalMeters: 5000)
-        mapView.setRegion(coordinateRegion, animated: true)
+        let losAngelesProperties = properties.filter { $0.propertycity == "LOS ANGELES" }
+        for property in losAngelesProperties {
+            if let locationCoordinate = property.locationCoordinate {
+                let coordinateRegion = MKCoordinateRegion(center: locationCoordinate,
+                                                          latitudinalMeters: 5000,
+                                                          longitudinalMeters: 5000)
+                mapView.setRegion(coordinateRegion, animated: true)
+                break
+            }
+        }
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -197,16 +256,13 @@ extension MapVC: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-//        guard let coordinate = view.annotation?.coordinate else { return }
-//        let region = MKCoordinateRegion(center: coordinate,
-//                                        latitudinalMeters: 1000,
-//                                        longitudinalMeters: 1000)
-//        mapView.setRegion(region, animated: true)
-//        mapView.deselectAnnotation(mapView.selectedAnnotations[0], animated: true)
-        
-        
-        
-        
+        guard let coordinate = view.annotation?.coordinate else { return }
+        let region = MKCoordinateRegion(center: coordinate,
+                                        latitudinalMeters: 1000,
+                                        longitudinalMeters: 1000)
+        mapView.setRegion(region, animated: true)
+        mapView.deselectAnnotation(mapView.selectedAnnotations[0], animated: true)
+
 //                guard let bikeAnnotation = view.annotation as? BikePointAnnotation,
 //            let bike = bikeAnnotation.bike,
 //            let popUpVC = mapPopUpVC,
@@ -224,6 +280,12 @@ extension MapVC: MKMapViewDelegate {
 //        let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
 //        mapView.setRegion(region, animated: true)
 //        mapView.deselectAnnotation(mapView.selectedAnnotations[0], animated: true)
+    }
+}
+
+extension MapVC: SearchVCDelegate {
+    func didSelect(city: String) {
+        dismissSearchVC()
     }
 }
 

@@ -81,13 +81,11 @@ class ChooseCityVC: UIViewController {
     }
         
     private func downloadProperties() {
-        propertyStore.downloadProperties { [weak self] result, cities in
+        propertyStore.downloadProperties { [weak self] result in
             self?.spinner.stopAnimating()
             switch result {
             case let .success(properties):
-                self?.cities = cities ?? [String]()
                 self?.properties = properties
-                self?.selectedCity = cities?.first ?? ""
             case let .failure(error):
                 self?.alertView?.show(error: error.localizedDescription)
             }
