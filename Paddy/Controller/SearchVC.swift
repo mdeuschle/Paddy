@@ -26,6 +26,7 @@ class SearchVC: UIViewController {
     weak var delegate: SearchVCDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchBar.isHidden = true
         
     }
 }

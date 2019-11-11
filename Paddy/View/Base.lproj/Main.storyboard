@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uwM-Wh-32Z">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uwM-Wh-32Z">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -82,23 +82,28 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nYA-Pf-t8z">
                                 <rect key="frame" x="100" y="12" width="214" height="8"/>
-                                <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="8" id="8wL-1J-6he"/>
                                 </constraints>
                             </view>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ooh-cW-FGP">
-                                <rect key="frame" x="0.0" y="32" width="414" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="ADz-rG-3H1"/>
-                                </constraints>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="0zz-WV-r2z" id="alY-Hf-hIh"/>
-                                </connections>
-                            </searchBar>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Bfh-5k-tdL">
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <subviews>
+                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ooh-cW-FGP">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="ADz-rG-3H1"/>
+                                        </constraints>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="0zz-WV-r2z" id="alY-Hf-hIh"/>
+                                        </connections>
+                                    </searchBar>
+                                </subviews>
+                            </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="6cG-wc-3e4">
-                                <rect key="frame" x="0.0" y="76" width="414" height="124"/>
+                                <rect key="frame" x="0.0" y="72" width="414" height="128"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="7Pe-qp-kXZ">
@@ -119,12 +124,12 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="nYA-Pf-t8z" secondAttribute="trailing" constant="100" id="0Bx-ac-pAn"/>
-                            <constraint firstAttribute="trailing" secondItem="ooh-cW-FGP" secondAttribute="trailing" id="5fZ-G3-67e"/>
+                            <constraint firstItem="UET-8w-VGg" firstAttribute="trailing" secondItem="Bfh-5k-tdL" secondAttribute="trailing" id="ASq-Zm-eVu"/>
+                            <constraint firstItem="Bfh-5k-tdL" firstAttribute="top" secondItem="nYA-Pf-t8z" secondAttribute="bottom" constant="8" id="BdV-rt-4ZN"/>
                             <constraint firstAttribute="bottom" secondItem="6cG-wc-3e4" secondAttribute="bottom" id="KOR-gn-ynh"/>
                             <constraint firstItem="nYA-Pf-t8z" firstAttribute="leading" secondItem="aUb-dz-33N" secondAttribute="leading" constant="100" id="MBZ-F9-ndY"/>
-                            <constraint firstItem="6cG-wc-3e4" firstAttribute="top" secondItem="ooh-cW-FGP" secondAttribute="bottom" id="MP0-TB-sQe"/>
-                            <constraint firstItem="ooh-cW-FGP" firstAttribute="top" secondItem="nYA-Pf-t8z" secondAttribute="bottom" constant="12" id="Y7T-59-z6U"/>
-                            <constraint firstItem="ooh-cW-FGP" firstAttribute="leading" secondItem="aUb-dz-33N" secondAttribute="leading" id="o3o-Ig-fk9"/>
+                            <constraint firstItem="6cG-wc-3e4" firstAttribute="top" secondItem="Bfh-5k-tdL" secondAttribute="bottom" id="ejE-nd-Hsy"/>
+                            <constraint firstItem="Bfh-5k-tdL" firstAttribute="leading" secondItem="UET-8w-VGg" secondAttribute="leading" id="f5o-xx-al5"/>
                             <constraint firstAttribute="trailing" secondItem="6cG-wc-3e4" secondAttribute="trailing" id="o87-CB-kVD"/>
                             <constraint firstItem="6cG-wc-3e4" firstAttribute="leading" secondItem="aUb-dz-33N" secondAttribute="leading" id="pz6-AF-MRq"/>
                             <constraint firstItem="nYA-Pf-t8z" firstAttribute="top" secondItem="aUb-dz-33N" secondAttribute="top" constant="12" id="u8P-5R-YdY"/>

@@ -35,12 +35,6 @@ final class MapVC: UIViewController {
     }
     private var alertView: AlertView!
     
-    let selectCityButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Select city", for: .normal)
-        return button
-    }()
-    
     let mapListViewButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("List", for: .normal)
@@ -55,7 +49,7 @@ final class MapVC: UIViewController {
         super.viewDidLoad()
         setupSpinner()
         configureLocationServices()
-        setUpUI()
+        setupUI()
         downloadProperties()
         tableView.dataSource = self
         setupSearchVC()
@@ -111,11 +105,6 @@ final class MapVC: UIViewController {
         present(searchVC, animated: true, completion: nil)
     }
     
-    @objc private func selectCityButtonTapped(_ sender: UIButton) {
-        loadSearchVC()
-        print("CITY TAP")
-    }
-    
     @objc private func mapListViewButtonTapped(_ sender: UIButton) {
         transitionViews()
     }
@@ -149,16 +138,13 @@ final class MapVC: UIViewController {
         }
     }
     
-    private func setUpUI() {
+    private func setupUI() {
         title = "LOS ANGELES"
         definesPresentationContext = true
-        selectCityButton.addTarget(self, action: #selector(selectCityButtonTapped(_:)), for: .touchUpInside)
         mapListViewButton.addTarget(self, action: #selector(mapListViewButtonTapped(_:)), for: .touchUpInside)
         let mapListButton = UIBarButtonItem(customView: mapListViewButton)
         let locationButton = MKUserTrackingBarButtonItem(mapView: mapView)
         navigationItem.rightBarButtonItems = [locationButton, mapListButton]
-        let selectCityButtonItem = UIBarButtonItem(customView: selectCityButton)
-        navigationItem.leftBarButtonItem = selectCityButtonItem
     }
     
     private func transitionViews() {
@@ -257,7 +243,9 @@ extension MapVC: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         guard let coordinate = view.annotation?.coordinate else { return }
-        let region = MKCoordinateRegion(center: coordinate,
+        let c = CLLocationCoordinate2D(latitude: coordinate.latitude - 0.002,
+                                       longitude: coordinate.longitude)
+        let region = MKCoordinateRegion(center: c,
                                         latitudinalMeters: 1000,
                                         longitudinalMeters: 1000)
         mapView.setRegion(region, animated: true)
