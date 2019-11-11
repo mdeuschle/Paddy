@@ -31,6 +31,7 @@ final class MapVC: UIViewController {
     private var selectedCity = "LOS ANGELES" {
         didSet {
             title = selectedCity
+            centerMapOnLocation()
         }
     }
     private var alertView: AlertView!
@@ -139,7 +140,7 @@ final class MapVC: UIViewController {
     }
     
     private func setupUI() {
-        title = "LOS ANGELES"
+        title = selectedCity
         definesPresentationContext = true
         mapListViewButton.addTarget(self, action: #selector(mapListViewButtonTapped(_:)), for: .touchUpInside)
         let mapListButton = UIBarButtonItem(customView: mapListViewButton)
@@ -216,7 +217,7 @@ extension MapVC: CLLocationManagerDelegate {
 extension MapVC: MKMapViewDelegate {
     
     private func centerMapOnLocation() {
-        let losAngelesProperties = properties.filter { $0.propertycity == "LOS ANGELES" }
+        let losAngelesProperties = properties.filter { $0.propertycity == selectedCity }
         for property in losAngelesProperties {
             if let locationCoordinate = property.locationCoordinate {
                 let coordinateRegion = MKCoordinateRegion(center: locationCoordinate,
@@ -243,9 +244,9 @@ extension MapVC: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         guard let coordinate = view.annotation?.coordinate else { return }
-        let c = CLLocationCoordinate2D(latitude: coordinate.latitude - 0.002,
+        let center = CLLocationCoordinate2D(latitude: coordinate.latitude - 0.002,
                                        longitude: coordinate.longitude)
-        let region = MKCoordinateRegion(center: c,
+        let region = MKCoordinateRegion(center: center,
                                         latitudinalMeters: 1000,
                                         longitudinalMeters: 1000)
         mapView.setRegion(region, animated: true)
@@ -273,7 +274,7 @@ extension MapVC: MKMapViewDelegate {
 
 extension MapVC: SearchVCDelegate {
     func didSelect(city: String) {
-        dismissSearchVC()
+        selectedCity = city
     }
 }
 

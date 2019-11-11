@@ -23,11 +23,11 @@ class SearchVC: UIViewController {
         }
     }
     var properties = [Property]()
+    private var selectedRow: Int? = nil
     weak var delegate: SearchVCDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.isHidden = true
-        
     }
 }
 
@@ -43,15 +43,33 @@ extension SearchVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell")
-        cell.textLabel?.text = cities[indexPath.row]
+        let city = cities[indexPath.row]
+        cell.textLabel?.text = city
+        cell.selectionStyle = .none
+        if city == "LOS ANGELES" && selectedRow == nil {
+            selectedRow = indexPath.row
+        }
+        if let selectedRow = selectedRow {
+            if indexPath.row == selectedRow {
+                cell.accessoryType = .checkmark
+                cell.isSelected = true
+            } else {
+                cell.accessoryType = .none
+                cell.isSelected = false
+            }
+        }
         return cell
     }
 }
 
 extension SearchVC: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
         let city = cities[indexPath.row]
         delegate?.didSelect(city: city)
         tableView.deselectRow(at: indexPath, animated: true)
+        tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        selectedRow = indexPath.row
+        tableView.reloadData()
     }
 }

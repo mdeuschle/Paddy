@@ -11,7 +11,6 @@
 		A86BDE0723370C3D00C4C9A9 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86BDE0623370C3D00C4C9A9 /* AlertView.swift */; };
 		A86BDE0923384EA400C4C9A9 /* PropertyPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86BDE0823384EA400C4C9A9 /* PropertyPointAnnotation.swift */; };
 		A86BDE0C234463DE00C4C9A9 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86BDE0A234463DE00C4C9A9 /* SearchVC.swift */; };
-		A88E409A231C3E6000913935 /* ChooseCityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88E4099231C3E6000913935 /* ChooseCityVC.swift */; };
 		A88E409C231C3F5D00913935 /* HeaderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88E409B231C3F5D00913935 /* HeaderLabel.swift */; };
 		A8A834522309D85700A945AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A834512309D85700A945AC /* AppDelegate.swift */; };
 		A8A834572309D85800A945AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8A834552309D85800A945AC /* Main.storyboard */; };
@@ -28,7 +27,6 @@
 		A86BDE0623370C3D00C4C9A9 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		A86BDE0823384EA400C4C9A9 /* PropertyPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyPointAnnotation.swift; sourceTree = "<group>"; };
 		A86BDE0A234463DE00C4C9A9 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
-		A88E4099231C3E6000913935 /* ChooseCityVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCityVC.swift; sourceTree = "<group>"; };
 		A88E409B231C3F5D00913935 /* HeaderLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderLabel.swift; sourceTree = "<group>"; };
 		A8A8344E2309D85700A945AC /* Paddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Paddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8A834512309D85700A945AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -95,7 +93,6 @@
 		A8A834642309DA6700A945AC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				A88E4099231C3E6000913935 /* ChooseCityVC.swift */,
 				A8DA5E6D231CA1DE005F2F44 /* MapVC.swift */,
 				A86BDE0A234463DE00C4C9A9 /* SearchVC.swift */,
 			);
@@ -203,7 +200,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A86BDE0923384EA400C4C9A9 /* PropertyPointAnnotation.swift in Sources */,
-				A88E409A231C3E6000913935 /* ChooseCityVC.swift in Sources */,
 				A88E409C231C3F5D00913935 /* HeaderLabel.swift in Sources */,
 				A86BDE0C234463DE00C4C9A9 /* SearchVC.swift in Sources */,
 				A86BDE0723370C3D00C4C9A9 /* AlertView.swift in Sources */,
