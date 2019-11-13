@@ -23,14 +23,18 @@ class SearchVC: UIViewController {
         }
     }
     var properties = [Property]()
-    private var selectedRow: Int? = nil
+    private var selectedIndexPath: IndexPath? = nil
     weak var delegate: SearchVCDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.isHidden = true
     }
+    
+    func viewDidSwipeDown() {
+        guard let indexPath = selectedIndexPath else { return }
+        tableView.scrollToRow(at: indexPath, at: .top, animated: false)
+    }
 }
-
 
 extension SearchVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -46,11 +50,11 @@ extension SearchVC: UITableViewDataSource {
         let city = cities[indexPath.row]
         cell.textLabel?.text = city
         cell.selectionStyle = .none
-        if city == "LOS ANGELES" && selectedRow == nil {
-            selectedRow = indexPath.row
+        if city == "LOS ANGELES" && selectedIndexPath?.row == nil {
+            selectedIndexPath = indexPath
         }
-        if let selectedRow = selectedRow {
-            if indexPath.row == selectedRow {
+        if let selectedIndexPath = selectedIndexPath {
+            if indexPath == selectedIndexPath {
                 cell.accessoryType = .checkmark
                 cell.isSelected = true
             } else {
@@ -69,7 +73,24 @@ extension SearchVC: UITableViewDelegate {
         delegate?.didSelect(city: city)
         tableView.deselectRow(at: indexPath, animated: true)
         tableView.scrollToRow(at: indexPath, at: .top, animated: true)
-        selectedRow = indexPath.row
+        selectedIndexPath = indexPath
         tableView.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let button = UIButton(type: .system)
+        let buttonFrame = CGRect(x: tableView.frame.width - 65,
+                                 y: 12,
+                            width: 54,
+                            height: 44)
+        button.frame = buttonFrame
+        button.setTitle("List", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        let headerView = UIView(frame: CGRect(x: 0,
+                                              y: 0,
+                                              width: tableView.frame.width,
+                                              height: 100))
+        headerView.addSubview(button)
+        return headerView
     }
 }

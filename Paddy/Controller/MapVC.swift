@@ -27,6 +27,7 @@ final class MapVC: UIViewController {
     }
     var cities = [String]()
     let locationManager = CLLocationManager()
+    var isSearchVCShown = false
     private var searchVC: SearchVC?
     private var selectedCity = "LOS ANGELES" {
         didSet {
@@ -78,13 +79,16 @@ final class MapVC: UIViewController {
     
     @objc private func swipeUp() {
         UIView.animate(withDuration: 0.25) { [weak self] in
-            self?.searchVCHeight.constant = (self?.view.bounds.height ?? 60) / 1.18
+            self?.searchVCHeight.constant = (self?.view.bounds.height ?? 60) / 1.28
+            self?.isSearchVCShown = true
             self?.view.layoutIfNeeded()
         }
     }
     
     @objc private func swipeDown() {
+        isSearchVCShown = false
         dismissSearchVC()
+        searchVC?.viewDidSwipeDown()
     }
     
     private func dismissSearchVC() {
