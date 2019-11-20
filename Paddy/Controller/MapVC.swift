@@ -19,7 +19,6 @@ final class MapVC: UIViewController {
     let propertyStore = PropertyStore()
     var properties = [Property]() {
         didSet {
-            print(properties)
             centerMapOnLocation()
             dropPins()
             searchVC?.properties = properties
@@ -36,12 +35,11 @@ final class MapVC: UIViewController {
         }
     }
     private var alertView: AlertView!
-    
-    let mapListViewButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("List", for: .normal)
-        return button
-    }()
+    private var isListView = false {
+        didSet {
+            
+        }
+    }
     
     let tableView: UITableView = {
         return UITableView()
@@ -110,10 +108,6 @@ final class MapVC: UIViewController {
         present(searchVC, animated: true, completion: nil)
     }
     
-    @objc private func mapListViewButtonTapped(_ sender: UIButton) {
-        transitionViews()
-    }
-    
     private func configureLocationServices() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
@@ -133,10 +127,6 @@ final class MapVC: UIViewController {
                 let properties = properties.filter { $0.propertyaddress != nil }
                 self?.properties = properties
                 self?.searchVC?.properties = properties
-                let citiesArray = properties.compactMap { $0.propertycity }
-                let cities = Array(Set(citiesArray)).sorted().filter { !$0.contains("APN") }
-                self?.cities = cities
-                self?.searchVC?.cities = cities
             case let .failure(error):
                 self?.alertView?.show(error: error.localizedDescription)
             }
@@ -146,14 +136,8 @@ final class MapVC: UIViewController {
     private func setupUI() {
         title = selectedCity
         definesPresentationContext = true
-        mapListViewButton.addTarget(self, action: #selector(mapListViewButtonTapped(_:)), for: .touchUpInside)
-        let mapListButton = UIBarButtonItem(customView: mapListViewButton)
         let locationButton = MKUserTrackingBarButtonItem(mapView: mapView)
-        navigationItem.rightBarButtonItems = [locationButton, mapListButton]
-    }
-    
-    private func transitionViews() {
-        mapListViewButton.titleLabel?.text == "List" ? showListView() : showMapView()
+        navigationItem.rightBarButtonItem = locationButton
     }
     
     private func showListView() {
@@ -170,23 +154,7 @@ final class MapVC: UIViewController {
                                 self.tableView.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
                                 self.tableView.bottomAnchor.constraint(equalTo: guide.bottomAnchor),
                             ])
-                            self.configureButtonTitle()
         }, completion: nil)
-    }
-    
-    private func showMapView() {
-        UIView.transition(with: view,
-                          duration: 0.4,
-                          options: [.transitionCurlDown, .curveEaseIn],
-                          animations: {
-                            self.tableView.removeFromSuperview()
-                            self.configureButtonTitle()
-        }, completion: nil)
-    }
-    
-    private func configureButtonTitle() {
-        let buttonTitle = mapListViewButton.titleLabel?.text == "List" ? "Map" : "List"
-        mapListViewButton.setTitle(buttonTitle, for: .normal)
     }
     
     private func dropPins() {
@@ -221,15 +189,13 @@ extension MapVC: CLLocationManagerDelegate {
 extension MapVC: MKMapViewDelegate {
     
     private func centerMapOnLocation() {
-        let losAngelesProperties = properties.filter { $0.propertycity == selectedCity }
-        for property in losAngelesProperties {
-            if let locationCoordinate = property.locationCoordinate {
-                let coordinateRegion = MKCoordinateRegion(center: locationCoordinate,
-                                                          latitudinalMeters: 5000,
-                                                          longitudinalMeters: 5000)
-                mapView.setRegion(coordinateRegion, animated: true)
-                break
-            }
+        let selectedProperties = properties.filter { $0.propertycity == selectedCity }
+        let property = selectedProperties[(selectedProperties.count - 1) / 2]
+        if let locationCoordinate = property.locationCoordinate {
+            let coordinateRegion = MKCoordinateRegion(center: locationCoordinate,
+                                                      latitudinalMeters: 5000,
+                                                      longitudinalMeters: 5000)
+            mapView.setRegion(coordinateRegion, animated: true)
         }
     }
     
@@ -255,28 +221,14 @@ extension MapVC: MKMapViewDelegate {
                                         longitudinalMeters: 1000)
         mapView.setRegion(region, animated: true)
         mapView.deselectAnnotation(mapView.selectedAnnotations[0], animated: true)
-
-//                guard let bikeAnnotation = view.annotation as? BikePointAnnotation,
-//            let bike = bikeAnnotation.bike,
-//            let popUpVC = mapPopUpVC,
-//            let latitude = bikeAnnotation.bike?.latitude,
-//            let longitude = bikeAnnotation.bike?.longitude else {
-//                return
-//        }
-//        popUpVC.configBike(bike: bike)
-//        popUpVC.configFavorite(isFavorite: bike.isFavorite)
-//        UIView.animate(withDuration: 0.25, animations: {
-//            self.mapPopUpHeight.constant = 238
-//            self.view.layoutIfNeeded()
-//        }, completion: nil)
-//        let coordinate = CLLocationCoordinate2DMake(latitude - 0.0028, longitude)
-//        let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
-//        mapView.setRegion(region, animated: true)
-//        mapView.deselectAnnotation(mapView.selectedAnnotations[0], animated: true)
     }
 }
 
 extension MapVC: SearchVCDelegate {
+    func didSelect(list: UIButton) {
+        
+    }
+    
     func didSelect(city: String) {
         selectedCity = city
     }
