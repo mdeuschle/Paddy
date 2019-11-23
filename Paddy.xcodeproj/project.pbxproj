@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A80545F0230A400500A964B1 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80545EF230A400500A964B1 /* Property.swift */; };
+		A83320EA2388CB4500BCAF7D /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83320E92388CB4500BCAF7D /* UIViewExtension.swift */; };
 		A86BDE0723370C3D00C4C9A9 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86BDE0623370C3D00C4C9A9 /* AlertView.swift */; };
 		A86BDE0923384EA400C4C9A9 /* PropertyPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86BDE0823384EA400C4C9A9 /* PropertyPointAnnotation.swift */; };
 		A86BDE0C234463DE00C4C9A9 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86BDE0A234463DE00C4C9A9 /* SearchVC.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		A80545EF230A400500A964B1 /* Property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
+		A83320E92388CB4500BCAF7D /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		A86BDE0623370C3D00C4C9A9 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		A86BDE0823384EA400C4C9A9 /* PropertyPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyPointAnnotation.swift; sourceTree = "<group>"; };
 		A86BDE0A234463DE00C4C9A9 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				A86BDE0623370C3D00C4C9A9 /* AlertView.swift */,
 				A86BDE0823384EA400C4C9A9 /* PropertyPointAnnotation.swift */,
 				A86FEB1B238793E500BF486F /* PropertyCell.swift */,
+				A83320E92388CB4500BCAF7D /* UIViewExtension.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 				A8DA5E6A231C4B45005F2F44 /* ChooseCityTextField.swift in Sources */,
 				A8E46E602309EA4D000A8467 /* PropertyStore.swift in Sources */,
 				A8DA5E6F231CA1DE005F2F44 /* MapVC.swift in Sources */,
+				A83320EA2388CB4500BCAF7D /* UIViewExtension.swift in Sources */,
 				A8E46E5E2309E56F000A8467 /* WebService.swift in Sources */,
 				A86FEB162382386200BF486F /* DataSource.swift in Sources */,
 				A8A834522309D85700A945AC /* AppDelegate.swift in Sources */,

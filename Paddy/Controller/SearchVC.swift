@@ -17,7 +17,7 @@ class SearchVC: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var searchBar: UISearchBar!
-    
+
     var cities = [String]()
     var properties = [Property]() {
         didSet {
@@ -52,9 +52,11 @@ class SearchVC: UIViewController {
         delegate?.didSelect(list: sender)
         if sender.titleLabel?.text == "Properties" {
             isProperties = true
+            searchBar.animate(isHidden: false)
             listButton.setTitle("Cities", for: .normal)
             tableView.reloadData()
         } else {
+            searchBar.animate(isHidden: true)
             isProperties = false
             listButton.setTitle("Properties", for: .normal)
             loadCities()
@@ -82,8 +84,7 @@ extension SearchVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PropertyCell 
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PropertyCell
         if isProperties {
             let property = filteredProperties[indexPath.row]
             cell.configure(property)
@@ -131,3 +132,4 @@ extension SearchVC: UITableViewDelegate {
         return headerView
     }
 }
+
