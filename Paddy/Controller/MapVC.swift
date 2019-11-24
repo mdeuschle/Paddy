@@ -34,12 +34,6 @@ final class MapVC: UIViewController {
         }
     }
     private var alertView: AlertView!
-    private var isListView = false {
-        didSet {
-            
-        }
-    }
-    
     let tableView: UITableView = {
         return UITableView()
     }()
@@ -75,15 +69,19 @@ final class MapVC: UIViewController {
     }
     
     @objc private func swipeUp() {
-        UIView.animate(withDuration: 0.25) { [weak self] in
-            self?.searchVCHeight.constant = (self?.view.bounds.height ?? 60) / 1.28
-            self?.view.layoutIfNeeded()
-        }
+        raiseSearchVC()
     }
     
     @objc private func swipeDown() {
         dismissSearchVC()
         searchVC?.viewDidSwipeDown()
+    }
+    
+    private func raiseSearchVC() {
+        UIView.animate(withDuration: 0.25) { [weak self] in
+            self?.searchVCHeight.constant = (self?.view.bounds.height ?? 60) / 1.28
+            self?.view.layoutIfNeeded()
+        }
     }
     
     private func dismissSearchVC() {
@@ -222,12 +220,17 @@ extension MapVC: MKMapViewDelegate {
 }
 
 extension MapVC: SearchVCDelegate {
+    
     func didSelect(list: UIButton) {
         
     }
     
     func didSelect(city: String) {
         selectedCity = city
+    }
+    
+    func didBeginEditing(searchBar: UISearchBar) {
+        raiseSearchVC()
     }
 }
 

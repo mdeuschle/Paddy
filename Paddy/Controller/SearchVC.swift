@@ -9,6 +9,7 @@
 protocol SearchVCDelegate: AnyObject {
     func didSelect(city: String)
     func didSelect(list: UIButton)
+    func didBeginEditing(searchBar: UISearchBar)
 }
 
 import UIKit
@@ -17,6 +18,8 @@ class SearchVC: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var searchBar: UISearchBar!
+    
+    let mapVC = MapVC()
 
     var cities = [String]()
     var properties = [Property]() {
@@ -46,6 +49,8 @@ class SearchVC: UIViewController {
     func viewDidSwipeDown() {
         guard let indexPath = selectedIndexPath else { return }
         tableView.scrollToRow(at: indexPath, at: .top, animated: false)
+        searchBar.searchTextField.resignFirstResponder()
+        searchBar.searchTextField.text = ""
     }
     
     @objc func listButtonTapped(_ sender: UIButton) {
@@ -92,10 +97,6 @@ extension SearchVC: UITableViewDataSource {
             let city = cities[indexPath.row]
             cell.configure(city, selectedIndexPath: &selectedIndexPath, indexPath: indexPath)
         }
-        
-
-            
-//        cell.textLabel?.text = properties[indexPath.row].propertyaddress ?? ""
         return cell
     }
 }
@@ -130,6 +131,12 @@ extension SearchVC: UITableViewDelegate {
             listButton.widthAnchor.constraint(equalToConstant: 80)
         ])
         return headerView
+    }
+}
+
+extension SearchVC: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        delegate?.didBeginEditing(searchBar: searchBar)
     }
 }
 
