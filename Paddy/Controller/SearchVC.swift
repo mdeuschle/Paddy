@@ -64,6 +64,7 @@ class SearchVC: UIViewController {
             searchBar.animate(isHidden: true)
             isProperties = false
             listButton.setTitle("Properties", for: .normal)
+            searchBar.searchTextField.resignFirstResponder()
             loadCities()
         }
     }
