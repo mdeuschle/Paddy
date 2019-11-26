@@ -20,15 +20,16 @@ class SearchVC: UIViewController {
     @IBOutlet var searchBar: UISearchBar!
     
     let mapVC = MapVC()
-
-    var cities = [String]()
+    private var cityDictionary = [String: Int]()
+    private var cities = [(city: String, count: Int)]()
     var properties = [Property]() {
         didSet {
             filteredProperties = properties.filter { $0.propertycity == "LOS ANGELES" }
             loadCities()
         }
     }
-    var filteredProperties = [Property]()
+    private var filteredProperties = [Property]()
+    private var searchProperties = [Property]()
     let listButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Properties", for: .normal)
@@ -37,6 +38,7 @@ class SearchVC: UIViewController {
     }()
     private var isProperties = false
     private var selectedIndexPath: IndexPath? = nil
+    private var inSearchMode = false
     weak var delegate: SearchVCDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,8 +72,14 @@ class SearchVC: UIViewController {
     }
     
     private func loadCities() {
-        let citiesArray = properties.compactMap { $0.propertycity }
-        cities = Array(Set(citiesArray)).sorted().filter { !$0.contains("APN") }
+        let _cities = properties.compactMap { $0.propertycity }
+        let mappedCities = _cities.compactMap { ($0, 1) }
+        cityDictionary = Dictionary(mappedCities, uniquingKeysWith: +)
+        var tuples = [(String, Int)]()
+        for (key, value) in cityDictionary {
+            tuples.append((key, value))
+        }
+        cities = tuples.sorted { $0.0 < $1.0 }.filter { !$0.0.contains("APN")}
         tableView.reloadData()
     }
 }
@@ -96,7 +104,10 @@ extension SearchVC: UITableViewDataSource {
             cell.configure(property)
         } else {
             let city = cities[indexPath.row]
-            cell.configure(city, selectedIndexPath: &selectedIndexPath, indexPath: indexPath)
+            cell.configure(city.city,
+                           selectedIndexPath: &selectedIndexPath,
+                           indexPath: indexPath,
+                           numberOfProperties: "Number of Properties: \(city.count)")
         }
         return cell
     }
@@ -106,7 +117,7 @@ extension SearchVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
         if !isProperties {
-            let city = cities[indexPath.row]
+            let city = cities[indexPath.row].city
             filteredProperties = properties.filter { $0.propertycity == city }
             delegate?.didSelect(city: city)
             tableView.deselectRow(at: indexPath, animated: true)
@@ -121,7 +132,7 @@ extension SearchVC: UITableViewDelegate {
                                               y: 0,
                                               width: tableView.frame.width,
                                               height: 80))
-        headerView.backgroundColor = .red
+        headerView.backgroundColor = .white
         headerView.addSubview(listButton)
         listButton.translatesAutoresizingMaskIntoConstraints = false
         listButton.contentHorizontalAlignment = .trailing

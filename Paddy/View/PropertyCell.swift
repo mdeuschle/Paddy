@@ -18,9 +18,12 @@ class PropertyCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(_ city: String, selectedIndexPath: inout IndexPath?, indexPath: IndexPath) {
+    func configure(_ city: String,
+                   selectedIndexPath: inout IndexPath?,
+                   indexPath: IndexPath,
+                   numberOfProperties: String) {
         textLabel?.text = city
-        detailTextLabel?.text = ""
+        detailTextLabel?.text = numberOfProperties
         selectionStyle = .none
         if city == "LOS ANGELES" && selectedIndexPath?.row == nil {
             selectedIndexPath = indexPath

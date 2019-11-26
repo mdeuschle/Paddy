@@ -24,7 +24,6 @@ final class MapVC: UIViewController {
             searchVC?.properties = properties
         }
     }
-    var cities = [String]()
     let locationManager = CLLocationManager()
     private var searchVC: SearchVC?
     private var selectedCity = "LOS ANGELES" {

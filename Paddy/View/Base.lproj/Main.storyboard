@@ -90,7 +90,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Bfh-5k-tdL">
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <subviews>
-                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ooh-cW-FGP">
+                                    <searchBar contentMode="redraw" placeholder="Search for properties" translatesAutoresizingMaskIntoConstraints="NO" id="ooh-cW-FGP">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="ADz-rG-3H1"/>
