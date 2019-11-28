@@ -21,11 +21,14 @@ class SearchVC: UIViewController {
     
     let mapVC = MapVC()
     private var cityDictionary = [String: Int]()
-    private var cities = [(city: String, count: Int)]()
+    var cities = [(city: String, count: Int)]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     var properties = [Property]() {
         didSet {
             filteredProperties = properties.filter { $0.propertycity == "LOS ANGELES" }
-            loadCities()
         }
     }
     private var filteredProperties = [Property]()
@@ -44,7 +47,6 @@ class SearchVC: UIViewController {
         super.viewDidLoad()
         searchBar.isHidden = true
         listButton.addTarget(self, action: #selector(listButtonTapped(_:)), for: .touchUpInside)
-        loadCities()
         tableView.register(PropertyCell.self, forCellReuseIdentifier: "Cell")
     }
     
@@ -67,20 +69,8 @@ class SearchVC: UIViewController {
             isProperties = false
             listButton.setTitle("Properties", for: .normal)
             searchBar.searchTextField.resignFirstResponder()
-            loadCities()
+            tableView.reloadData()
         }
-    }
-    
-    private func loadCities() {
-        let _cities = properties.compactMap { $0.propertycity }
-        let mappedCities = _cities.compactMap { ($0, 1) }
-        cityDictionary = Dictionary(mappedCities, uniquingKeysWith: +)
-        var tuples = [(String, Int)]()
-        for (key, value) in cityDictionary {
-            tuples.append((key, value))
-        }
-        cities = tuples.sorted { $0.0 < $1.0 }.filter { !$0.0.contains("APN")}
-        tableView.reloadData()
     }
 }
 

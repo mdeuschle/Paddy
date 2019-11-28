@@ -24,6 +24,7 @@ final class MapVC: UIViewController {
             searchVC?.properties = properties
         }
     }
+    private var cities = [(city: String, count: Int)]()
     let locationManager = CLLocationManager()
     private var searchVC: SearchVC?
     private var selectedCity = "LOS ANGELES" {
@@ -121,6 +122,14 @@ final class MapVC: UIViewController {
                 let properties = properties.filter { $0.propertyaddress != nil }
                 self?.properties = properties
                 self?.searchVC?.properties = properties
+                let _cities = properties.compactMap { $0.propertycity }
+                let mappedCities = _cities.compactMap { ($0, 1) }
+                let cityDictionary = Dictionary(mappedCities, uniquingKeysWith: +)
+                var tuples = [(String, Int)]()
+                for (key, value) in cityDictionary { tuples.append((key, value)) }
+                let cities = tuples.sorted { $0.0 < $1.0 }.filter { !$0.0.contains("APN")}
+                self?.cities = cities
+                self?.searchVC?.cities = cities
             case let .failure(error):
                 self?.alertView?.show(error: error.localizedDescription)
             }
