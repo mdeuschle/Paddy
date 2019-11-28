@@ -113,7 +113,7 @@ final class MapVC: UIViewController {
             return
         }
     }
-        
+    
     private func downloadProperties() {
         propertyStore.downloadProperties { [weak self] result in
             self?.spinner.stopAnimating()
@@ -218,7 +218,7 @@ extension MapVC: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         guard let coordinate = view.annotation?.coordinate else { return }
         let center = CLLocationCoordinate2D(latitude: coordinate.latitude - 0.002,
-                                       longitude: coordinate.longitude)
+                                            longitude: coordinate.longitude)
         let region = MKCoordinateRegion(center: center,
                                         latitudinalMeters: 1000,
                                         longitudinalMeters: 1000)
@@ -239,6 +239,15 @@ extension MapVC: SearchVCDelegate {
     
     func didBeginEditing(searchBar: UISearchBar) {
         raiseSearchVC()
+    }
+    
+    func didTap(button: UIButton) {
+        guard let searchVC = searchVC else { return }
+        if searchVC.isUp {
+            dismissSearchVC()
+        } else {
+            raiseSearchVC()
+        }
     }
 }
 

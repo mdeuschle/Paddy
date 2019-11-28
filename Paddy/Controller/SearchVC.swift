@@ -10,6 +10,7 @@ protocol SearchVCDelegate: AnyObject {
     func didSelect(city: String)
     func didSelect(list: UIButton)
     func didBeginEditing(searchBar: UISearchBar)
+    func didTap(button: UIButton)
 }
 
 import UIKit
@@ -43,6 +44,7 @@ class SearchVC: UIViewController {
     private var selectedIndexPath: IndexPath? = nil
     private var inSearchMode = false
     weak var delegate: SearchVCDelegate?
+    var isUp = false
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.isHidden = true
@@ -71,6 +73,11 @@ class SearchVC: UIViewController {
             searchBar.searchTextField.resignFirstResponder()
             tableView.reloadData()
         }
+    }
+    
+    @IBAction func buttonTapped(_ sender: UIButton) {
+        isUp.toggle()
+        delegate?.didTap(button: sender)
     }
 }
 
