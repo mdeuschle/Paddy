@@ -161,7 +161,10 @@ final class MapVC: UIViewController {
     }
     
     private func dropPins() {
-        for property in properties {
+        let annotations = mapView.annotations
+        mapView.removeAnnotations(annotations)
+        let filteredProperties = properties.filter { $0.propertycity == selectedCity }
+        for property in filteredProperties {
             if let annotation = PropertyPointAnnotation(property: property) {
                 mapView.addAnnotation(annotation)
             }
@@ -235,6 +238,7 @@ extension MapVC: SearchVCDelegate {
     
     func didSelect(city: String) {
         selectedCity = city
+        dropPins()
     }
     
     func didBeginEditing(searchBar: UISearchBar) {
