@@ -134,6 +134,13 @@ extension SearchVC: UITableViewDelegate {
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if isProperties {
+            let property = filteredProperties[indexPath.row]
+            print(property.details())
+        }
+    }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView(frame: CGRect(x: 0,
                                               y: 0,
