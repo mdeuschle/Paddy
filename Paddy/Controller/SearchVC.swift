@@ -33,7 +33,11 @@ class SearchVC: UIViewController {
         }
     }
     private var filteredProperties = [Property]()
-    private var searchProperties = [Property]()
+    private var searchProperties = [Property]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     let listButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Properties", for: .normal)
@@ -78,6 +82,7 @@ class SearchVC: UIViewController {
     @IBAction func buttonTapped(_ sender: UIButton) {
         isUp.toggle()
         delegate?.didTap(button: sender)
+        if isUp { searchBar.searchTextField.resignFirstResponder() }
     }
 }
 
@@ -88,7 +93,11 @@ extension SearchVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isProperties {
-            return filteredProperties.count
+            if inSearchMode {
+                return searchProperties.count
+            } else {
+                return filteredProperties.count
+            }
         } else {
             return cities.count
         }
@@ -97,14 +106,19 @@ extension SearchVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PropertyCell
         if isProperties {
-            let property = filteredProperties[indexPath.row]
+            let property: Property
+            if inSearchMode {
+                property = searchProperties[indexPath.row]
+            } else {
+                property = filteredProperties[indexPath.row]
+            }
             cell.configure(property)
         } else {
             let city = cities[indexPath.row]
             cell.configure(city.city,
                            selectedIndexPath: &selectedIndexPath,
                            indexPath: indexPath,
-                           numberOfProperties: "Number of Properties: \(city.count)")
+                           numberOfProperties: "\(city.count) Properties")
         }
         return cell
     }
@@ -146,6 +160,20 @@ extension SearchVC: UITableViewDelegate {
 extension SearchVC: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         delegate?.didBeginEditing(searchBar: searchBar)
-    }
+        if let searchText = searchBar.text, !searchText.isEmpty {
+            inSearchMode = true
+            var _searchProperties = [Property]()
+            _searchProperties = filteredProperties.filter {
+                ($0.propertycity?.contains(searchText.lowercased().trimmingCharacters(in: .whitespaces)) ?? false)
+                }
+            _searchProperties = filteredProperties.filter {
+                ($0.propertyaddress?.contains(searchText.lowercased().trimmingCharacters(in: .whitespaces)) ?? false)
+                }
+            searchProperties = _searchProperties
+            } else {
+                inSearchMode = false
+                tableView.reloadData()
+            }
+        }
 }
 

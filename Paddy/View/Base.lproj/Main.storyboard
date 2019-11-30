@@ -82,15 +82,21 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nYA-Pf-t8z">
                                 <rect key="frame" x="100" y="12" width="214" height="8"/>
-                                <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="8" id="8wL-1J-6he"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <real key="value" value="3.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Bfh-5k-tdL">
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <subviews>
-                                    <searchBar contentMode="redraw" placeholder="Search for properties" translatesAutoresizingMaskIntoConstraints="NO" id="ooh-cW-FGP">
+                                    <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search for properties" translatesAutoresizingMaskIntoConstraints="NO" id="ooh-cW-FGP">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="ADz-rG-3H1"/>
@@ -147,6 +153,12 @@
                             <constraint firstItem="nYA-Pf-t8z" firstAttribute="top" secondItem="aUb-dz-33N" secondAttribute="top" constant="12" id="u8P-5R-YdY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UET-8w-VGg"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <connections>
                         <outlet property="searchBar" destination="ooh-cW-FGP" id="cVQ-70-lbc"/>
