@@ -33,11 +33,7 @@ class SearchVC: UIViewController {
         }
     }
     private var filteredProperties = [Property]()
-    private var searchProperties = [Property]() {
-        didSet {
-            tableView.reloadData()
-        }
-    }
+    private var searchProperties = [Property]()
     let listButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Properties", for: .normal)
@@ -160,20 +156,23 @@ extension SearchVC: UITableViewDelegate {
 extension SearchVC: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         delegate?.didBeginEditing(searchBar: searchBar)
-        if let searchText = searchBar.text, !searchText.isEmpty {
-            inSearchMode = true
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            inSearchMode = false
+        } else {
             var _searchProperties = [Property]()
             _searchProperties = filteredProperties.filter {
-                ($0.propertycity?.contains(searchText.lowercased().trimmingCharacters(in: .whitespaces)) ?? false)
-                }
-            _searchProperties = filteredProperties.filter {
-                ($0.propertyaddress?.contains(searchText.lowercased().trimmingCharacters(in: .whitespaces)) ?? false)
-                }
-            searchProperties = _searchProperties
-            } else {
-                inSearchMode = false
-                tableView.reloadData()
+                ($0.propertyzip?.contains(searchText.lowercased().trimmingCharacters(in: .whitespaces)) ?? false)
             }
+            _searchProperties += filteredProperties.filter {
+                ($0.propertyaddress?.lowercased().contains(searchText.lowercased()) ?? false)
+            }
+            searchProperties = _searchProperties
+            inSearchMode = true
         }
+        tableView.reloadData()
+    }
 }
 
