@@ -8,7 +8,6 @@
 
 protocol SearchVCDelegate: AnyObject {
     func didSelect(city: String)
-    func didSelect(list: UIButton)
     func didBeginEditing(searchBar: UISearchBar)
     func didTap(button: UIButton)
 }
@@ -62,7 +61,6 @@ class SearchVC: UIViewController {
     }
     
     @objc func listButtonTapped(_ sender: UIButton) {
-        delegate?.didSelect(list: sender)
         if sender.titleLabel?.text == "Properties" {
             isProperties = true
             searchBar.animate(isHidden: false)

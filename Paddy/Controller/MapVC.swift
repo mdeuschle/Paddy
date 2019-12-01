@@ -230,10 +230,6 @@ extension MapVC: MKMapViewDelegate {
 
 extension MapVC: SearchVCDelegate {
     
-    func didSelect(list: UIButton) {
-        
-    }
-    
     func didSelect(city: String) {
         selectedCity = city
         dropPins()
