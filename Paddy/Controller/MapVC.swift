@@ -220,6 +220,12 @@ extension MapVC: MKMapViewDelegate {
         }
         return view
     }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        guard let annotation = view.annotation as? PropertyPointAnnotation else { return }
+        let detailVC = DetailVC(property: annotation.property)
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
 }
 
 extension MapVC: SearchVCDelegate {
