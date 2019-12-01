@@ -206,27 +206,19 @@ extension MapVC: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard annotation is MKPointAnnotation else { return nil }
+        guard let annotation = annotation as? PropertyPointAnnotation else { return nil }
         let identifier = "annotation"
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-        if annotationView == nil {
-            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            annotationView!.canShowCallout = true
+        var view: MKMarkerAnnotationView
+        if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+            as? MKMarkerAnnotationView {
+            dequeuedView.annotation = annotation
+            view = dequeuedView
         } else {
-            annotationView!.annotation = annotation
+            view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            view.canShowCallout = true
+            view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         }
-        return annotationView
-    }
-    
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        guard let coordinate = view.annotation?.coordinate else { return }
-        let center = CLLocationCoordinate2D(latitude: coordinate.latitude - 0.002,
-                                            longitude: coordinate.longitude)
-        let region = MKCoordinateRegion(center: center,
-                                        latitudinalMeters: 1000,
-                                        longitudinalMeters: 1000)
-        mapView.setRegion(region, animated: true)
-        mapView.deselectAnnotation(mapView.selectedAnnotations[0], animated: true)
+        return view
     }
 }
 
