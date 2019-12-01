@@ -20,7 +20,7 @@ class DetailVC: UITableViewController {
             }
         }
         tableData = _tableData
-        super.init(style: .grouped)
+        super.init(style: .plain)
     }
     
     required init?(coder: NSCoder) {
@@ -29,7 +29,9 @@ class DetailVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        title = "Property Details"
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 44
     }
     
     // MARK: - Table view data source
@@ -49,6 +51,7 @@ class DetailVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "")
         let detail = tableData[indexPath.section].detail
+        cell.textLabel?.numberOfLines = 0
         cell.textLabel?.text = detail
         return cell
     }

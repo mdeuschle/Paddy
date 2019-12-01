@@ -41,7 +41,9 @@ class PropertyCell: UITableViewCell {
     
     func configure(_ property: Property) {
         accessoryType = .disclosureIndicator
+        textLabel?.numberOfLines = 0
         textLabel?.text = property.propertyaddress
+        detailTextLabel?.numberOfLines = 0
         detailTextLabel?.text = property.propertyzip
     }
 }

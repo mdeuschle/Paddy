@@ -50,6 +50,8 @@ class SearchVC: UIViewController {
         searchBar.isHidden = true
         listButton.addTarget(self, action: #selector(listButtonTapped(_:)), for: .touchUpInside)
         tableView.register(PropertyCell.self, forCellReuseIdentifier: "Cell")
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 44
     }
     
     func viewDidSwipeDown() {
@@ -136,6 +138,7 @@ extension SearchVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if isProperties {
+            tableView.deselectRow(at: indexPath, animated: true)
             let property = filteredProperties[indexPath.row]
             let detailVC = DetailVC(property: property)
             navigationController?.pushViewController(detailVC, animated: true)
