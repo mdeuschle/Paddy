@@ -38,8 +38,10 @@ struct Property: Decodable {
     }
 }
 
+typealias TableData = (title: String, detail: String?)
+
 extension Property {
-    func details() -> [(title: String, detail: String?)] {
+    func details() -> [TableData] {
         return [
             ("Registered Date", registered_date?.capitalized),
             ("Property Type", property_type?.capitalized),
