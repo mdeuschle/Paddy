@@ -137,7 +137,8 @@ extension SearchVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if isProperties {
             let property = filteredProperties[indexPath.row]
-            print(property.details())
+            let detailVC = DetailVC(property: property)
+            navigationController?.pushViewController(detailVC, animated: true)
         }
     }
     

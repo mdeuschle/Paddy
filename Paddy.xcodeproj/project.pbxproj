@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A80545F0230A400500A964B1 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80545EF230A400500A964B1 /* Property.swift */; };
+		A82E87B123933A590098924B /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82E87AF23933A590098924B /* DetailVC.swift */; };
 		A83320EA2388CB4500BCAF7D /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83320E92388CB4500BCAF7D /* UIViewExtension.swift */; };
 		A86BDE0723370C3D00C4C9A9 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86BDE0623370C3D00C4C9A9 /* AlertView.swift */; };
 		A86BDE0923384EA400C4C9A9 /* PropertyPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86BDE0823384EA400C4C9A9 /* PropertyPointAnnotation.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		A80545EF230A400500A964B1 /* Property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
+		A82E87AF23933A590098924B /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		A83320E92388CB4500BCAF7D /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		A86BDE0623370C3D00C4C9A9 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		A86BDE0823384EA400C4C9A9 /* PropertyPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyPointAnnotation.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			children = (
 				A8DA5E6D231CA1DE005F2F44 /* MapVC.swift */,
 				A86BDE0A234463DE00C4C9A9 /* SearchVC.swift */,
+				A82E87AF23933A590098924B /* DetailVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -207,6 +210,7 @@
 			files = (
 				A86BDE0923384EA400C4C9A9 /* PropertyPointAnnotation.swift in Sources */,
 				A86FEB1C238793E500BF486F /* PropertyCell.swift in Sources */,
+				A82E87B123933A590098924B /* DetailVC.swift in Sources */,
 				A86BDE0C234463DE00C4C9A9 /* SearchVC.swift in Sources */,
 				A86BDE0723370C3D00C4C9A9 /* AlertView.swift in Sources */,
 				A80545F0230A400500A964B1 /* Property.swift in Sources */,
