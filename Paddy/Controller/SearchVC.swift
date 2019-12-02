@@ -149,7 +149,7 @@ extension SearchVC: UITableViewDelegate {
                                               y: 0,
                                               width: tableView.frame.width,
                                               height: 80))
-        headerView.backgroundColor = UIColor.myColor()
+        headerView.backgroundColor = UIColor.darkmodeColor()
         headerView.addSubview(listButton)
         listButton.translatesAutoresizingMaskIntoConstraints = false
         listButton.contentHorizontalAlignment = .trailing
@@ -186,7 +186,7 @@ extension SearchVC: UISearchBarDelegate {
 }
 
 extension UIColor {
-    static func myColor() -> UIColor {
+    static func darkmodeColor() -> UIColor {
         if #available(iOS 13, *) {
             return UIColor.init { (trait) -> UIColor in
                 return trait.userInterfaceStyle == .dark ? .black : .white
