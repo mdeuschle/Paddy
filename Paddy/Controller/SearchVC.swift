@@ -37,6 +37,7 @@ class SearchVC: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("Properties", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
+        button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
         return button
     }()
     private var isProperties = false
@@ -148,15 +149,14 @@ extension SearchVC: UITableViewDelegate {
                                               y: 0,
                                               width: tableView.frame.width,
                                               height: 80))
-        headerView.backgroundColor = .white
+        headerView.backgroundColor = UIColor.myColor()
         headerView.addSubview(listButton)
         listButton.translatesAutoresizingMaskIntoConstraints = false
         listButton.contentHorizontalAlignment = .trailing
         NSLayoutConstraint.activate([
             listButton.topAnchor.constraint(equalTo: headerView.topAnchor),
             listButton.bottomAnchor.constraint(equalTo: headerView.bottomAnchor),
-            listButton.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -20),
-            listButton.widthAnchor.constraint(equalToConstant: 80)
+            listButton.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -20)
         ])
         return headerView
     }
@@ -182,6 +182,17 @@ extension SearchVC: UISearchBarDelegate {
             inSearchMode = true
         }
         tableView.reloadData()
+    }
+}
+
+extension UIColor {
+    static func myColor() -> UIColor {
+        if #available(iOS 13, *) {
+            return UIColor.init { (trait) -> UIColor in
+                return trait.userInterfaceStyle == .dark ? .black : .white
+            }
+        }
+        else { return .white }
     }
 }
 
