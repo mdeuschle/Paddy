@@ -15,7 +15,7 @@ final class PropertyStore {
             case let .success(data):
                 do {
                     let properties = try JSONDecoder().decode([Property].self, from: data)
-                    let sortedProperties = properties.sorted { $0.propertyaddress ?? "" < $1.propertyaddress ?? "" }
+                    let sortedProperties = properties.sorted { $0.registered_date ?? "" > $1.registered_date ?? "" }
                     completion(.success(sortedProperties))
                 } catch {
                     completion(.failure(error))

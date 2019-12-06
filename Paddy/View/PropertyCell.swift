@@ -44,6 +44,6 @@ class PropertyCell: UITableViewCell {
         textLabel?.numberOfLines = 0
         textLabel?.text = property.propertyaddress
         detailTextLabel?.numberOfLines = 0
-        detailTextLabel?.text = property.propertyzip
+        detailTextLabel?.text = property.registered_date?.dateString()
     }
 }
