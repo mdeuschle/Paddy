@@ -11,6 +11,11 @@
 		A82E87B123933A590098924B /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82E87AF23933A590098924B /* DetailVC.swift */; };
 		A82E87B8239A27560098924B /* PropertyDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A82E87B6239A27560098924B /* PropertyDetailVC.xib */; };
 		A83320EA2388CB4500BCAF7D /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83320E92388CB4500BCAF7D /* UIViewExtension.swift */; };
+		A83BCA9F23B5CF870024FBFE /* PropertyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A83BCA9E23B5CF870024FBFE /* PropertyCell.xib */; };
+		A83BCAA223B8503C0024FBFE /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83BCAA023B8503C0024FBFE /* DetailCell.swift */; };
+		A83BCAA323B8503C0024FBFE /* DetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A83BCAA123B8503C0024FBFE /* DetailCell.xib */; };
+		A83BCAA523C108AC0024FBFE /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83BCAA423C108AC0024FBFE /* ShadowView.swift */; };
+		A83BCAA823C10C950024FBFE /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83BCAA723C10C950024FBFE /* ViewExtension.swift */; };
 		A86BDE0723370C3D00C4C9A9 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86BDE0623370C3D00C4C9A9 /* AlertView.swift */; };
 		A86BDE0923384EA400C4C9A9 /* PropertyPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86BDE0823384EA400C4C9A9 /* PropertyPointAnnotation.swift */; };
 		A86BDE0C234463DE00C4C9A9 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86BDE0A234463DE00C4C9A9 /* SearchVC.swift */; };
@@ -31,6 +36,11 @@
 		A82E87AF23933A590098924B /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		A82E87B6239A27560098924B /* PropertyDetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PropertyDetailVC.xib; sourceTree = "<group>"; };
 		A83320E92388CB4500BCAF7D /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		A83BCA9E23B5CF870024FBFE /* PropertyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PropertyCell.xib; sourceTree = "<group>"; };
+		A83BCAA023B8503C0024FBFE /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
+		A83BCAA123B8503C0024FBFE /* DetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailCell.xib; sourceTree = "<group>"; };
+		A83BCAA423C108AC0024FBFE /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
+		A83BCAA723C10C950024FBFE /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		A86BDE0623370C3D00C4C9A9 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		A86BDE0823384EA400C4C9A9 /* PropertyPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyPointAnnotation.swift; sourceTree = "<group>"; };
 		A86BDE0A234463DE00C4C9A9 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
@@ -59,6 +69,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A83BCAA623C10C6D0024FBFE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A83BCAA723C10C950024FBFE /* ViewExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		A8A834452309D85700A945AC = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +101,7 @@
 				A8A834652309DA6F00A945AC /* View */,
 				A8A834642309DA6700A945AC /* Controller */,
 				A8A834632309DA5C00A945AC /* Support Files */,
+				A83BCAA623C10C6D0024FBFE /* Extensions */,
 				A8A8345D2309D86400A945AC /* Info.plist */,
 			);
 			path = Paddy;
@@ -116,8 +135,12 @@
 				A8DA5E69231C4B45005F2F44 /* ChooseCityTextField.swift */,
 				A86BDE0623370C3D00C4C9A9 /* AlertView.swift */,
 				A86BDE0823384EA400C4C9A9 /* PropertyPointAnnotation.swift */,
-				A86FEB1B238793E500BF486F /* PropertyCell.swift */,
 				A83320E92388CB4500BCAF7D /* UIViewExtension.swift */,
+				A86FEB1B238793E500BF486F /* PropertyCell.swift */,
+				A83BCA9E23B5CF870024FBFE /* PropertyCell.xib */,
+				A83BCAA023B8503C0024FBFE /* DetailCell.swift */,
+				A83BCAA123B8503C0024FBFE /* DetailCell.xib */,
+				A83BCAA423C108AC0024FBFE /* ShadowView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -199,6 +222,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A8A8345C2309D86400A945AC /* LaunchScreen.storyboard in Resources */,
+				A83BCA9F23B5CF870024FBFE /* PropertyCell.xib in Resources */,
+				A83BCAA323B8503C0024FBFE /* DetailCell.xib in Resources */,
 				A8A834592309D86400A945AC /* Assets.xcassets in Resources */,
 				A82E87B8239A27560098924B /* PropertyDetailVC.xib in Resources */,
 				A8A834572309D85800A945AC /* Main.storyboard in Resources */,
@@ -218,12 +243,15 @@
 				A86BDE0C234463DE00C4C9A9 /* SearchVC.swift in Sources */,
 				A86BDE0723370C3D00C4C9A9 /* AlertView.swift in Sources */,
 				A80545F0230A400500A964B1 /* Property.swift in Sources */,
+				A83BCAA823C10C950024FBFE /* ViewExtension.swift in Sources */,
 				A8DA5E6A231C4B45005F2F44 /* ChooseCityTextField.swift in Sources */,
 				A8E46E602309EA4D000A8467 /* PropertyStore.swift in Sources */,
 				A8DA5E6F231CA1DE005F2F44 /* MapVC.swift in Sources */,
+				A83BCAA523C108AC0024FBFE /* ShadowView.swift in Sources */,
 				A83320EA2388CB4500BCAF7D /* UIViewExtension.swift in Sources */,
 				A8E46E5E2309E56F000A8467 /* WebService.swift in Sources */,
 				A86FEB162382386200BF486F /* DataSource.swift in Sources */,
+				A83BCAA223B8503C0024FBFE /* DetailCell.swift in Sources */,
 				A8A834522309D85700A945AC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

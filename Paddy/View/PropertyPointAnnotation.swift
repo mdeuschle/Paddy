@@ -9,7 +9,7 @@
 import Foundation
 import MapKit
 
-class PropertyPointAnnotation: NSObject, MKAnnotation {
+final class PropertyPointAnnotation: NSObject, MKAnnotation {
     let property: Property
     let title: String?
     let subtitle: String?

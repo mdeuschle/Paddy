@@ -8,24 +8,19 @@
 
 import UIKit
 
-class PropertyCell: UITableViewCell {
+final class PropertyCell: UITableViewCell {
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var detailLabel: UILabel!
     
     func configure(_ city: String,
                    selectedIndexPath: inout IndexPath?,
                    indexPath: IndexPath,
                    numberOfProperties: String) {
-        textLabel?.text = city
-        detailTextLabel?.text = numberOfProperties
+        titleLabel.text = city
+        detailLabel.text = numberOfProperties
         selectionStyle = .none
-        if city == "LOS ANGELES" && selectedIndexPath?.row == nil {
+        if city == "LOS ANGELES", selectedIndexPath?.row == nil {
             selectedIndexPath = indexPath
         }
         if let selectedIndexPath = selectedIndexPath {
@@ -41,9 +36,7 @@ class PropertyCell: UITableViewCell {
     
     func configure(_ property: Property) {
         accessoryType = .disclosureIndicator
-        textLabel?.numberOfLines = 0
-        textLabel?.text = property.propertyaddress
-        detailTextLabel?.numberOfLines = 0
-        detailTextLabel?.text = property.registered_date?.dateString()
+        titleLabel.text = property.propertyaddress
+        detailLabel.text = property.registered_date?.dateString()
     }
 }

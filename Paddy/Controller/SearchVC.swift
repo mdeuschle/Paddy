@@ -14,7 +14,7 @@ protocol SearchVCDelegate: AnyObject {
 
 import UIKit
 
-class SearchVC: UIViewController {
+final class SearchVC: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var searchBar: UISearchBar!
@@ -49,14 +49,13 @@ class SearchVC: UIViewController {
         super.viewDidLoad()
         searchBar.isHidden = true
         listButton.addTarget(self, action: #selector(listButtonTapped(_:)), for: .touchUpInside)
-        tableView.register(PropertyCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(UINib(nibName: "PropertyCell", bundle: nil),
+                           forCellReuseIdentifier: "PropertyCell")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
     }
     
     func viewDidSwipeDown() {
-        guard let indexPath = selectedIndexPath else { return }
-        tableView.scrollToRow(at: indexPath, at: .top, animated: false)
         searchBar.searchTextField.resignFirstResponder()
         searchBar.searchTextField.text = ""
     }
@@ -101,7 +100,7 @@ extension SearchVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PropertyCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PropertyCell", for: indexPath) as! PropertyCell
         if isProperties {
             let property: Property
             if inSearchMode {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailVC: UITableViewController {
+final class DetailVC: UITableViewController {
     
     private var tableData = [TableData]()
     

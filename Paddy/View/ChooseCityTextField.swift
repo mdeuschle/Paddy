@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChooseCityTextField: UITextField {
+final class ChooseCityTextField: UITextField {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
