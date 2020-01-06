@@ -22,7 +22,7 @@ final class DetailVC: UITableViewController {
         tableData = _tableData
         super.init(style: .plain)
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
@@ -30,29 +30,42 @@ final class DetailVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Property Details"
+        setupTableView()
+    }
+    
+    private func setupTableView() {
+        let nib = UINib(nibName: "ShadowCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "ShadowCell")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
+        tableView.separatorStyle = .none
     }
     
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return tableData.count
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return tableData[section].title
-    }
+//    override func numberOfSections(in tableView: UITableView) -> Int {
+//        return tableData.count
+//    }
+//
+//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return tableData[section].title
+//    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return tableData.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "")
-        let detail = tableData[indexPath.section].detail
-        cell.textLabel?.numberOfLines = 0
-        cell.textLabel?.text = detail
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ShadowCell", for: indexPath) as? ShadowCell else {
+            return UITableViewCell()
+        }
+        let property = tableData[indexPath.row]
+        cell.titleLabel.text = property.title
+        cell.detailLabel.text = property.detail
+//        let cell = UITableViewCell(style: .default, reuseIdentifier: "")
+//        let detail = tableData[indexPath.section].detail
+//        cell.textLabel?.numberOfLines = 0
+//        cell.textLabel?.text = detail
         return cell
     }
 }

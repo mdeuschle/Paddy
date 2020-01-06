@@ -14,7 +14,7 @@ extension UIView {
         clipsToBounds = false
         layer.cornerRadius = 5
         layer.shadowOffset = CGSize(width: 0, height: 2)
-        layer.shadowRadius = 1
+        layer.shadowRadius = 2
         layer.shadowOpacity = 0.7
         layer.shadowColor = UIColor.darkGray.cgColor
         let cgSize = CGSize(width: 5, height: 5)

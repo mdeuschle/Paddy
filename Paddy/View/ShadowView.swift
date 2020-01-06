@@ -11,7 +11,7 @@ import UIKit
 final class ShadowView: UIView {
     override var bounds: CGRect {
         didSet {
-            // do something
+            addShadow()
         }
     }
 }

@@ -1,14 +1,17 @@
 //
-//  DetailCell.swift
+//  ShadowCell.swift
 //  Paddy
 //
-//  Created by Matt Deuschle on 12/28/19.
-//  Copyright © 2019 Matt Deuschle. All rights reserved.
+//  Created by Matt Deuschle on 1/5/20.
+//  Copyright © 2020 Matt Deuschle. All rights reserved.
 //
 
 import UIKit
 
-final class DetailCell: UITableViewCell {
+class ShadowCell: UITableViewCell {
+    
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var detailLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

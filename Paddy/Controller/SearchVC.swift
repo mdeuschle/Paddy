@@ -23,6 +23,7 @@ final class SearchVC: UIViewController {
     private var cityDictionary = [String: Int]()
     var cities = [(city: String, count: Int)]() {
         didSet {
+            listButton.isHidden = false
             tableView.reloadData()
         }
     }
@@ -48,6 +49,7 @@ final class SearchVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.isHidden = true
+        listButton.isHidden = true
         listButton.addTarget(self, action: #selector(listButtonTapped(_:)), for: .touchUpInside)
         tableView.register(UINib(nibName: "PropertyCell", bundle: nil),
                            forCellReuseIdentifier: "PropertyCell")
