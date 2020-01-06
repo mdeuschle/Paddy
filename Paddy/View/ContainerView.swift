@@ -23,7 +23,6 @@ final class ContainerView: UIView {
     private func setupView() {
         layer.cornerRadius = 5.0
         clipsToBounds = true
-        backgroundColor = .white
     }
 }
 

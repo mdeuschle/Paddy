@@ -8,10 +8,6 @@
 
 import Foundation
 
-//https://data.lacity.org/resource/rsxb-x48z.json
-
-//"https://data.lacity.org/resource/fdwe-pgcu.json?$limit=5&$$app_token=LFuu36jqve2Td9BWBffSS1iJm"
-
 struct WebService {
     private init() {}
     static let shared = WebService()

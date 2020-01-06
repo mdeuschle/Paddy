@@ -50,6 +50,11 @@ struct Property: Decodable {
             + " "
             + _zip
     }
+    
+    var propManagementAddress: String? {
+        guard let address = propertymanagementaddress else { return nil }
+        return address.replacingOccurrences(of: "  ", with: " ")
+    }
 }
 
 typealias TableData = (title: String, detail: String?)
@@ -66,7 +71,7 @@ extension Property {
             ("Lender Contact Phone", lendercontactphone?.capitalized),
             ("Property Management", propertymanagement?.capitalized),
             ("Property Management Contact", propertymanagementcontact?.capitalized),
-            ("Property Management Address", propertymanagementaddress),
+            ("Property Management Address", propManagementAddress),
             ("Property Management Phone", propertymgmtcontactphone?.capitalized),
             ("APN", apn?.capitalized)
         ]

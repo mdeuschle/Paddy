@@ -43,14 +43,6 @@ final class DetailVC: UITableViewController {
     
     // MARK: - Table view data source
 
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        return tableData.count
-//    }
-//
-//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return tableData[section].title
-//    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableData.count
     }
@@ -60,12 +52,7 @@ final class DetailVC: UITableViewController {
             return UITableViewCell()
         }
         let property = tableData[indexPath.row]
-        cell.titleLabel.text = property.title
-        cell.detailLabel.text = property.detail
-//        let cell = UITableViewCell(style: .default, reuseIdentifier: "")
-//        let detail = tableData[indexPath.section].detail
-//        cell.textLabel?.numberOfLines = 0
-//        cell.textLabel?.text = detail
+        cell.configure(property: property)
         return cell
     }
 }
