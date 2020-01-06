@@ -21,5 +21,10 @@ class ShadowCell: UITableViewCell {
     func configure(property: TableData) {
         titleLabel.text = property.title
         detailTextView.text = property.detail
+        if property.title == "APN" {
+            detailTextView.dataDetectorTypes = .lookupSuggestion
+        } else {
+            detailTextView.dataDetectorTypes = .all
+        }
     }
 }
