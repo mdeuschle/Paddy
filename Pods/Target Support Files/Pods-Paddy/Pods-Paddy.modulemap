@@ -1,0 +1,6 @@
+framework module Pods_Paddy {
+  umbrella header "Pods-Paddy-umbrella.h"
+
+  export *
+  module * { export * }
+}

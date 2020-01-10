@@ -30,9 +30,12 @@
 		A8DA5E6F231CA1DE005F2F44 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DA5E6D231CA1DE005F2F44 /* MapVC.swift */; };
 		A8E46E5E2309E56F000A8467 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E46E5D2309E56F000A8467 /* WebService.swift */; };
 		A8E46E602309EA4D000A8467 /* PropertyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E46E5F2309EA4D000A8467 /* PropertyStore.swift */; };
+		E8D678A5E96F306C79211923 /* Pods_Paddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 567B138C4DB991C28D6790F7 /* Pods_Paddy.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		28D7A5D2C93751E2DE88A313 /* Pods-Paddy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Paddy.debug.xcconfig"; path = "Target Support Files/Pods-Paddy/Pods-Paddy.debug.xcconfig"; sourceTree = "<group>"; };
+		567B138C4DB991C28D6790F7 /* Pods_Paddy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Paddy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A80545EF230A400500A964B1 /* Property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
 		A82E87AF23933A590098924B /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		A82E87B6239A27560098924B /* PropertyDetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PropertyDetailVC.xib; sourceTree = "<group>"; };
@@ -58,6 +61,7 @@
 		A8DA5E6D231CA1DE005F2F44 /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		A8E46E5D2309E56F000A8467 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		A8E46E5F2309EA4D000A8467 /* PropertyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyStore.swift; sourceTree = "<group>"; };
+		E32BCECD86C0CF07AEA0F7E6 /* Pods-Paddy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Paddy.release.xcconfig"; path = "Target Support Files/Pods-Paddy/Pods-Paddy.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,12 +69,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8D678A5E96F306C79211923 /* Pods_Paddy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4336765B0C2047F11CE3323A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				28D7A5D2C93751E2DE88A313 /* Pods-Paddy.debug.xcconfig */,
+				E32BCECD86C0CF07AEA0F7E6 /* Pods-Paddy.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		79E0751DB2046B16D729822F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				567B138C4DB991C28D6790F7 /* Pods_Paddy.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A83BCAA623C10C6D0024FBFE /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -84,6 +107,8 @@
 			children = (
 				A8A834502309D85700A945AC /* Paddy */,
 				A8A8344F2309D85700A945AC /* Products */,
+				4336765B0C2047F11CE3323A /* Pods */,
+				79E0751DB2046B16D729822F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -173,9 +198,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A8A834602309D86400A945AC /* Build configuration list for PBXNativeTarget "Paddy" */;
 			buildPhases = (
+				921961ED1C821D08E7626CC2 /* [CP] Check Pods Manifest.lock */,
 				A8A8344A2309D85700A945AC /* Sources */,
 				A8A8344B2309D85700A945AC /* Frameworks */,
 				A8A8344C2309D85700A945AC /* Resources */,
+				EB0B11C65154CD4C0ABAF8FF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -234,6 +261,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		921961ED1C821D08E7626CC2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Paddy-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EB0B11C65154CD4C0ABAF8FF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Paddy/Pods-Paddy-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Paddy/Pods-Paddy-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Paddy/Pods-Paddy-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A8A8344A2309D85700A945AC /* Sources */ = {
@@ -400,6 +469,7 @@
 		};
 		A8A834612309D86400A945AC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 28D7A5D2C93751E2DE88A313 /* Pods-Paddy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -418,6 +488,7 @@
 		};
 		A8A834622309D86400A945AC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E32BCECD86C0CF07AEA0F7E6 /* Pods-Paddy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

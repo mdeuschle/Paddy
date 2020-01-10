@@ -13,6 +13,7 @@ protocol SearchVCDelegate: AnyObject {
 }
 
 import UIKit
+import GoogleMobileAds
 
 final class SearchVC: UIViewController {
     
@@ -46,6 +47,7 @@ final class SearchVC: UIViewController {
     private var inSearchMode = false
     weak var delegate: SearchVCDelegate?
     var isUp = false
+    var interstitial: GADInterstitial!
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.isHidden = true
@@ -55,6 +57,9 @@ final class SearchVC: UIViewController {
                            forCellReuseIdentifier: "PropertyCell")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
+        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        let request = GADRequest()
+        interstitial.load(request)
     }
     
     func viewDidSwipeDown() {

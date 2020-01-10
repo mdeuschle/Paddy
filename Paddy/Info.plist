@@ -47,5 +47,7 @@
 	<string>Paddy requires your location to locate nearest properties</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Paddy requires your location to locate nearest properties</string>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-4242338858452610~6524118895</string>
 </dict>
 </plist>
