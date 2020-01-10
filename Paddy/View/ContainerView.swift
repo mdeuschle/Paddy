@@ -21,7 +21,7 @@ final class ContainerView: UIView {
     }
     
     private func setupView() {
-        layer.cornerRadius = 5.0
+        layer.cornerRadius = 10
         clipsToBounds = true
     }
 }

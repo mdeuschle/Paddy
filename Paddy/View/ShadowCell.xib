@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,22 +19,22 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="McB-JF-dCO" customClass="ShadowView" customModule="Paddy" customModuleProvider="target">
-                        <rect key="frame" x="24" y="12" width="482" height="193"/>
+                        <rect key="frame" x="28" y="14" width="474" height="189"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZEX-fH-Ilw" customClass="ContainerView" customModule="Paddy" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="482" height="193"/>
+                                <rect key="frame" x="0.0" y="0.0" width="474" height="189"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="NzM-BT-C9n">
-                                        <rect key="frame" x="16" y="16" width="450" height="161"/>
+                                        <rect key="frame" x="16" y="16" width="442" height="157"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gQC-em-MNW">
-                                                <rect key="frame" x="0.0" y="0.0" width="450" height="24"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="442" height="24"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="DetailText" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qn8-Q7-pPq">
-                                                <rect key="frame" x="0.0" y="123" width="450" height="38"/>
+                                                <rect key="frame" x="0.0" y="119" width="442" height="38"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -51,6 +52,7 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <color key="backgroundColor" name="ContainerColor"/>
                         <constraints>
                             <constraint firstItem="ZEX-fH-Ilw" firstAttribute="top" secondItem="McB-JF-dCO" secondAttribute="top" id="1D1-GB-jCm"/>
                             <constraint firstItem="ZEX-fH-Ilw" firstAttribute="leading" secondItem="McB-JF-dCO" secondAttribute="leading" id="OeO-Ov-Kdb"/>
@@ -60,10 +62,10 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="McB-JF-dCO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="HCH-SH-d4o"/>
-                    <constraint firstAttribute="bottom" secondItem="McB-JF-dCO" secondAttribute="bottom" constant="12" id="a3E-lc-ced"/>
-                    <constraint firstItem="McB-JF-dCO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="dbQ-bC-ust"/>
-                    <constraint firstAttribute="trailing" secondItem="McB-JF-dCO" secondAttribute="trailing" constant="24" id="sYK-QH-VIC"/>
+                    <constraint firstItem="McB-JF-dCO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="28" id="HCH-SH-d4o"/>
+                    <constraint firstAttribute="bottom" secondItem="McB-JF-dCO" secondAttribute="bottom" constant="14" id="a3E-lc-ced"/>
+                    <constraint firstItem="McB-JF-dCO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="dbQ-bC-ust"/>
+                    <constraint firstAttribute="trailing" secondItem="McB-JF-dCO" secondAttribute="trailing" constant="28" id="sYK-QH-VIC"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -74,4 +76,9 @@
             <point key="canvasLocation" x="289.85507246376812" y="145.64732142857142"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <namedColor name="ContainerColor">
+            <color red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
