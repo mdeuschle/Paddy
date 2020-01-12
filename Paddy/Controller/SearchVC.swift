@@ -60,6 +60,11 @@ final class SearchVC: UIViewController {
         interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
         let request = GADRequest()
         interstitial.load(request)
+        if interstitial.isReady {
+          interstitial.present(fromRootViewController: self)
+        } else {
+          print("Ad wasn't ready")
+        }
     }
     
     func viewDidSwipeDown() {
