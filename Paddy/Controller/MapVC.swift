@@ -47,6 +47,10 @@ final class MapVC: UIViewController {
         tableView.dataSource = self
         setupSearchVC()
         setupSwipeGestureRecognizers()
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "",
+                                                           style: .plain,
+                                                           target: nil,
+                                                           action: nil)
     }
     
     private func setupSearchVC() {
@@ -216,7 +220,9 @@ extension MapVC: MKMapViewDelegate {
         } else {
             view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             view.canShowCallout = true
-            view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            let button = UIButton(type: .detailDisclosure)
+            button.tintColor = .systemTeal
+            view.rightCalloutAccessoryView = button
         }
         return view
     }

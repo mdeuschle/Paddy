@@ -20,6 +20,7 @@ final class PropertyCell: UITableViewCell {
         titleLabel.text = city
         detailLabel.text = numberOfProperties
         selectionStyle = .none
+        accessoryType = .none
         if city == "LOS ANGELES", selectedIndexPath?.row == nil {
             selectedIndexPath = indexPath
         }
