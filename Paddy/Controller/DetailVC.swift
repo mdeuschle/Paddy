@@ -10,16 +10,10 @@ import UIKit
 
 final class DetailVC: UITableViewController {
     
-    private var tableData = [TableData]()
+    private var tableData = [[TableData]]()
     
     init(property: Property) {
-        var _tableData = [TableData]()
-        for detail in property.details() {
-            if detail.detail != nil {
-                _tableData.append(detail)
-            }
-        }
-        tableData = _tableData
+        tableData = property.all()
         super.init(style: .plain)
     }
 
@@ -42,17 +36,20 @@ final class DetailVC: UITableViewController {
     }
     
     // MARK: - Table view data source
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return tableData.count
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableData.count
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ShadowCell", for: indexPath) as? ShadowCell else {
             return UITableViewCell()
         }
-        let property = tableData[indexPath.row]
-        cell.configure(property: property)
+        cell.configure(tableData: tableData, at: indexPath.section)
         return cell
     }
 }

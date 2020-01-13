@@ -57,24 +57,43 @@ struct Property: Decodable {
     }
 }
 
-typealias TableData = (title: String, detail: String?)
+typealias TableData = (type: PropertyType, detail: String?)
 
 extension Property {
-    func details() -> [TableData] {
+    private func dateDetails() -> [TableData] {
         return [
-            ("Registered Date", registered_date?.dateString()),
-            ("Property Type", property_type?.capitalized),
-            ("Address", address),
-            ("Councel District", councildistrict?.capitalized),
-            ("Lender", lender?.capitalized),
-            ("Lender Contact", lendercontact?.capitalized),
-            ("Lender Contact Phone", lendercontactphone?.capitalized),
-            ("Property Management", propertymanagement?.capitalized),
-            ("Property Management Contact", propertymanagementcontact?.capitalized),
-            ("Property Management Address", propManagementAddress),
-            ("Property Management Phone", propertymgmtcontactphone?.capitalized),
-            ("APN", apn?.capitalized)
+            (.registeredDate, registered_date?.dateString()),
         ]
+    }
+    
+    private func attributesDetails() -> [TableData] {
+        return [
+            (.type, property_type?.capitalized),
+            (.address, address),
+            (.councelDistrict, councildistrict?.capitalized),
+            (.apn, apn?.capitalized),
+        ]
+    }
+    
+    private func lenderDetails() -> [TableData] {
+        return [
+            (.lender, lender?.capitalized),
+            (.lenderContact, lendercontact?.capitalized),
+            (.lenderContactPhone, lendercontactphone?.capitalized),
+        ]
+    }
+    
+    private func managementDetails() -> [TableData] {
+        return [
+            (.propertyManagement, propertymanagement?.capitalized),
+            (.propertyManagementContact, propertymanagementcontact?.capitalized),
+            (.propertyManagementAddress, propManagementAddress),
+            (.propertyManagementPhone, propertymgmtcontactphone?.capitalized),
+        ]
+    }
+    
+    func all() -> [[TableData]] {
+        return [dateDetails(), attributesDetails(), lenderDetails(), managementDetails()]
     }
 }
 
@@ -88,6 +107,22 @@ extension String {
         return formatter.string(from: date)
     }
 }
+
+enum PropertyType: String {
+    case registeredDate = "Registered Date"
+    case type = "Property Type"
+    case address = "Address"
+    case councelDistrict = "Councel District"
+    case apn = "Assessor's Parcel Number"
+    case lender = "Lender"
+    case lenderContact = "Lender Contact"
+    case lenderContactPhone = "Lender Contact Phone"
+    case propertyManagement = "Property Management"
+    case propertyManagementContact = "Property Management Contact"
+    case propertyManagementAddress = "Property Management Address"
+    case propertyManagementPhone = "Property Management Phone"
+}
+
 
 
 
