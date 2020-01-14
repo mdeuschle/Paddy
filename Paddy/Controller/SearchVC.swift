@@ -38,8 +38,8 @@ final class SearchVC: UIViewController {
     let listButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Properties", for: .normal)
-        button.setTitleColor(.systemOrange, for: .normal)
-        button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         return button
     }()
     private var isProperties = false

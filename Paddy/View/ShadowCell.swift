@@ -105,12 +105,12 @@ class ShadowCell: UITableViewCell {
     
     private func attributedString(for title: String, detail: String) -> NSMutableAttributedString? {
         let attributedString = NSMutableAttributedString()
-        let titleAttribute = [NSAttributedString.Key.font : UIFont.preferredFont(forTextStyle: .headline),
-                              .foregroundColor: UIColor.customFont]
+        let titleAttribute = [NSAttributedString.Key.font : UIFont.preferredFont(forTextStyle: .body),
+                              .foregroundColor: UIColor.greyFont]
         let titleString = NSMutableAttributedString(string: title,
                                                     attributes: titleAttribute)
-        let detailAttribute = [NSAttributedString.Key.font : UIFont.preferredFont(forTextStyle: .body),
-                               .foregroundColor: UIColor.customFont]
+        let detailAttribute = [NSAttributedString.Key.font : UIFont.preferredFont(forTextStyle: .title2),
+                               .foregroundColor: UIColor.blackFont]
         let detailString = NSMutableAttributedString(string: detail,
                                                      attributes: detailAttribute)
         let space = NSAttributedString(string: "\n")

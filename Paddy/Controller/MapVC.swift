@@ -221,7 +221,6 @@ extension MapVC: MKMapViewDelegate {
             view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             view.canShowCallout = true
             let button = UIButton(type: .detailDisclosure)
-            button.tintColor = .systemTeal
             view.rightCalloutAccessoryView = button
         }
         return view
