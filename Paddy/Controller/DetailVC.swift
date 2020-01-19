@@ -7,11 +7,20 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 final class DetailVC: UITableViewController {
     
     private var tableData = [[TableData]]()
     private var property: Property!
+    
+    lazy var bannerView: GADBannerView = {
+        let bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.delegate = self
+        bannerView.rootViewController = self
+        return bannerView
+    }()
     
     init(property: Property) {
         tableData = property.all()
@@ -22,19 +31,28 @@ final class DetailVC: UITableViewController {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
-    private var shareButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(barButtonSystemItem: .action,
-                                     target: self,
-                                     action: #selector(shareContent))
-        return button
-    }()
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Property Details"
         setupTableView()
-        navigationItem.rightBarButtonItem = shareButton
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action,
+                                                            target: self,
+                                                            action: #selector(shareContent))
+        bannerView.load(GADRequest())
+    }
+    
+    private func setupBannerAd() {
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bannerView)
+        bannerView.alpha = 0
+        let safeArea = view.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+            bannerView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+            bannerView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+            bannerView.heightAnchor.constraint(equalTo: bannerView.heightAnchor),
+            bannerView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
+        ])
     }
     
     private func setupTableView() {
@@ -67,5 +85,15 @@ final class DetailVC: UITableViewController {
         }
         cell.configure(tableData: tableData, at: indexPath.section)
         return cell
+    }
+}
+
+extension DetailVC: GADBannerViewDelegate {
+    
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        setupBannerAd()
+        UIView.animate(withDuration: 0.4) {
+            bannerView.alpha = 1
+        }
     }
 }

@@ -53,7 +53,6 @@ final class SearchVC: UIViewController {
         configureTableView()
         setupListButton()
         searchBar.isHidden = true
-        setupInterstitial()
     }
     
     private func configureTableView() {
@@ -66,17 +65,6 @@ final class SearchVC: UIViewController {
     private func setupListButton() {
         listButton.isHidden = true
         listButton.addTarget(self, action: #selector(listButtonTapped(_:)), for: .touchUpInside)
-    }
-    
-    private func setupInterstitial() {
-        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
-        let request = GADRequest()
-        interstitial.load(request)
-        if interstitial.isReady {
-          interstitial.present(fromRootViewController: self)
-        } else {
-          print("Ad wasn't ready")
-        }
     }
     
     private func property(at indexPath: IndexPath) -> Property {
