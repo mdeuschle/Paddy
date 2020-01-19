@@ -11,9 +11,11 @@ import UIKit
 final class DetailVC: UITableViewController {
     
     private var tableData = [[TableData]]()
+    private var property: Property!
     
     init(property: Property) {
         tableData = property.all()
+        self.property = property
         super.init(style: .plain)
     }
 
@@ -21,10 +23,18 @@ final class DetailVC: UITableViewController {
         super.init(coder: coder)
     }
     
+    private var shareButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(barButtonSystemItem: .action,
+                                     target: self,
+                                     action: #selector(shareContent))
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Property Details"
         setupTableView()
+        navigationItem.rightBarButtonItem = shareButton
     }
     
     private func setupTableView() {
@@ -33,6 +43,12 @@ final class DetailVC: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
         tableView.separatorStyle = .none
+    }
+    
+    @objc private func shareContent() {
+        let vc = UIActivityViewController(activityItems: [property.details()],
+                                          applicationActivities: [])
+        present(vc, animated: true)
     }
     
     // MARK: - Table view data source

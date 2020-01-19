@@ -95,6 +95,16 @@ extension Property {
     func all() -> [[TableData]] {
         return [dateDetails(), attributesDetails(), lenderDetails(), managementDetails()]
     }
+    
+    func details() -> [String: String] {
+        var result = [String: String]()
+        for detail in all() {
+            for (key, value) in detail {
+                result[key.rawValue] = value ?? ""
+            }
+        }
+        return result
+    }
 }
 
 extension String {

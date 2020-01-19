@@ -85,11 +85,7 @@ final class SearchVC: UIViewController {
     
     func viewDidSwipeDown() {
         searchBar.searchTextField.text = ""
-        inSearchMode = false
-        isProperties = false
-        searchBar.animate(isHidden: true)
-        listButton.setTitle("Properties", for: .normal)
-        searchBar.searchTextField.resignFirstResponder()
+        resetView()
         tableView.reloadData()
     }
     
@@ -99,13 +95,17 @@ final class SearchVC: UIViewController {
             searchBar.animate(isHidden: false)
             listButton.setTitle("Cities", for: .normal)
         } else {
-            inSearchMode = false
-            isProperties = false
-            searchBar.animate(isHidden: true)
-            listButton.setTitle("Properties", for: .normal)
-            searchBar.searchTextField.resignFirstResponder()
+            resetView()
         }
         tableView.reloadData()
+    }
+    
+    private func resetView() {
+        inSearchMode = false
+        isProperties = false
+        searchBar.animate(isHidden: true)
+        listButton.setTitle("Properties", for: .normal)
+        searchBar.searchTextField.resignFirstResponder()
     }
     
     @IBAction func buttonTapped(_ sender: UIButton) {
