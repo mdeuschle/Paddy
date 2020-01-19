@@ -78,7 +78,6 @@ final class MapVC: UIViewController {
     
     @objc private func swipeDown() {
         dismissSearchVC()
-        searchVC?.viewDidSwipeDown()
     }
     
     private func raiseSearchVC() {
@@ -92,6 +91,7 @@ final class MapVC: UIViewController {
         UIView.animate(withDuration: 0.25) { [weak self] in
             self?.searchVCHeight.constant = (self?.view.bounds.height ?? 60) / 3.5
             self?.view.layoutIfNeeded()
+            self?.searchVC?.viewDidSwipeDown()
         }
     }
     

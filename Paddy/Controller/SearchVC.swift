@@ -50,13 +50,25 @@ final class SearchVC: UIViewController {
     var interstitial: GADInterstitial!
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureTableView()
+        setupListButton()
         searchBar.isHidden = true
-        listButton.isHidden = true
-        listButton.addTarget(self, action: #selector(listButtonTapped(_:)), for: .touchUpInside)
+        setupInterstitial()
+    }
+    
+    private func configureTableView() {
         tableView.register(UINib(nibName: "PropertyCell", bundle: nil),
                            forCellReuseIdentifier: "PropertyCell")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
+    }
+    
+    private func setupListButton() {
+        listButton.isHidden = true
+        listButton.addTarget(self, action: #selector(listButtonTapped(_:)), for: .touchUpInside)
+    }
+    
+    private func setupInterstitial() {
         interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
         let request = GADRequest()
         interstitial.load(request)
@@ -67,9 +79,18 @@ final class SearchVC: UIViewController {
         }
     }
     
+    private func property(at indexPath: IndexPath) -> Property {
+        return inSearchMode ? searchProperties[indexPath.row] : filteredProperties[indexPath.row]
+    }
+    
     func viewDidSwipeDown() {
-        searchBar.searchTextField.resignFirstResponder()
         searchBar.searchTextField.text = ""
+        inSearchMode = false
+        isProperties = false
+        searchBar.animate(isHidden: true)
+        listButton.setTitle("Properties", for: .normal)
+        searchBar.searchTextField.resignFirstResponder()
+        tableView.reloadData()
     }
     
     @objc func listButtonTapped(_ sender: UIButton) {
@@ -77,20 +98,26 @@ final class SearchVC: UIViewController {
             isProperties = true
             searchBar.animate(isHidden: false)
             listButton.setTitle("Cities", for: .normal)
-            tableView.reloadData()
         } else {
-            searchBar.animate(isHidden: true)
+            inSearchMode = false
             isProperties = false
+            searchBar.animate(isHidden: true)
             listButton.setTitle("Properties", for: .normal)
             searchBar.searchTextField.resignFirstResponder()
-            tableView.reloadData()
         }
+        tableView.reloadData()
     }
     
     @IBAction func buttonTapped(_ sender: UIButton) {
         isUp.toggle()
         delegate?.didTap(button: sender)
-        if isUp { searchBar.searchTextField.resignFirstResponder() }
+        if isUp {
+            searchBar.searchTextField.resignFirstResponder()
+            searchBar.searchTextField.text = ""
+            inSearchMode = false
+            listButton.setTitle("Properties", for: .normal)
+            tableView.reloadData()
+        }
     }
 }
 
@@ -114,13 +141,7 @@ extension SearchVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PropertyCell", for: indexPath) as! PropertyCell
         if isProperties {
-            let property: Property
-            if inSearchMode {
-                property = searchProperties[indexPath.row]
-            } else {
-                property = filteredProperties[indexPath.row]
-            }
-            cell.configure(property)
+            cell.configure(property(at: indexPath))
         } else {
             let city = cities[indexPath.row]
             cell.configure(city.city,
@@ -149,8 +170,7 @@ extension SearchVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if isProperties {
             tableView.deselectRow(at: indexPath, animated: true)
-            let property = filteredProperties[indexPath.row]
-            let detailVC = DetailVC(property: property)
+            let detailVC = DetailVC(property: property(at: indexPath))
             navigationController?.pushViewController(detailVC, animated: true)
         }
     }
