@@ -96,14 +96,19 @@ extension Property {
         return [dateDetails(), attributesDetails(), lenderDetails(), managementDetails()]
     }
     
-    func details() -> [String: String] {
-        var result = [String: String]()
+    func getDetails() -> [Any] {
+        var string = ""
         for detail in all() {
             for (key, value) in detail {
-                result[key.rawValue] = value ?? ""
+                string.append(key.rawValue + ": " + "\(value ?? "") \n")
             }
         }
-        return result
+        // FIXME
+        if let url = URL(string: "https://www.apple.com") {
+            return [url, string]
+        } else {
+            return [string]
+        }
     }
 }
 

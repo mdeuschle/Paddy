@@ -64,7 +64,7 @@ final class DetailVC: UITableViewController {
     }
     
     @objc private func shareContent() {
-        let vc = UIActivityViewController(activityItems: [property.details()],
+        let vc = UIActivityViewController(activityItems: property.getDetails(),
                                           applicationActivities: [])
         present(vc, animated: true)
     }
@@ -97,3 +97,4 @@ extension DetailVC: GADBannerViewDelegate {
         }
     }
 }
+
