@@ -12,6 +12,7 @@ class ShadowCell: UITableViewCell {
     
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var detailTextView: UITextView!
+    @IBOutlet var bottonConstraint: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,6 +28,7 @@ class ShadowCell: UITableViewCell {
             title = "Date"
             detail = attributedString(for: tableData.type.rawValue,
                                       detail: tableData.detail ?? "") ?? NSMutableAttributedString()
+            bottonConstraint.constant = 10
         case 1:
             let typeTableData = tableData[1][0]
             title = "Attributes"
@@ -51,6 +53,7 @@ class ShadowCell: UITableViewCell {
                                        detail: apnTableData.detail ?? "") ?? NSMutableAttributedString()
             tempAttributedString.append(apn)
             detail = tempAttributedString
+            bottonConstraint.constant = 10
         case 2:
             let lenderTableData = tableData[2][0]
             title = "Lender"
@@ -71,6 +74,7 @@ class ShadowCell: UITableViewCell {
                                        detail: lenderPhoneTableData.detail ?? "") ?? NSMutableAttributedString()
             tempAttributedString.append(lenderPhone)
             detail = tempAttributedString
+            bottonConstraint.constant = 10
         case 3:
             let propertyManagementTableData = tableData[3][0]
             title = "Management"
@@ -95,9 +99,11 @@ class ShadowCell: UITableViewCell {
                                                  detail: propertyManagementPhoneTableData.detail ?? "") ?? NSMutableAttributedString()
             tempAttributedString.append(propertyManagementPhone)
             detail = tempAttributedString
+            bottonConstraint.constant = 80
         default:
             title = ""
             detail = NSMutableAttributedString()
+            bottonConstraint.constant = 10
         }
         titleLabel.text = title
         detailTextView.attributedText = detail

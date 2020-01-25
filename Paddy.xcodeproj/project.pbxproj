@@ -152,7 +152,6 @@
 				A8DA5E6D231CA1DE005F2F44 /* MapVC.swift */,
 				A86BDE0A234463DE00C4C9A9 /* SearchVC.swift */,
 				A82E87AF23933A590098924B /* DetailVC.swift */,
-				A82E87B6239A27560098924B /* PropertyDetailVC.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -171,6 +170,7 @@
 				A83BCAA923C116620024FBFE /* ContainerView.swift */,
 				A83BCAF523C2AAED0024FBFE /* ShadowCell.swift */,
 				A83BCAF623C2AAED0024FBFE /* ShadowCell.xib */,
+				A82E87B6239A27560098924B /* PropertyDetailVC.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
