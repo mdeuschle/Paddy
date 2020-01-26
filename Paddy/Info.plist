@@ -18,8 +18,16 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-4242338858452610~6524118895</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Paddy requires your location to locate nearest properties</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Paddy requires your location to locate nearest properties</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Paddy requires your location to locate nearest properties</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -41,13 +49,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Paddy requires your location to locate nearest properties</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Paddy requires your location to locate nearest properties</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Paddy requires your location to locate nearest properties</string>
-	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-4242338858452610~6524118895</string>
 </dict>
 </plist>
