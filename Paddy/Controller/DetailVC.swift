@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMobileAds
+import StoreKit
 
 final class DetailVC: UITableViewController {
     
@@ -40,6 +41,7 @@ final class DetailVC: UITableViewController {
                                                             target: self,
                                                             action: #selector(shareContent))
         bannerView.load(GADRequest())
+        SKStoreReviewController.requestReview()
     }
     
     private func setupBannerAd() {

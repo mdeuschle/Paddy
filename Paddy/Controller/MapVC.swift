@@ -191,10 +191,7 @@ extension MapVC: UITableViewDataSource {
     }
 }
 
-extension MapVC: CLLocationManagerDelegate {
-    
-    
-}
+extension MapVC: CLLocationManagerDelegate {}
 
 extension MapVC: MKMapViewDelegate {
     
