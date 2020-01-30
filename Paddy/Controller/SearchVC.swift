@@ -13,7 +13,6 @@ protocol SearchVCDelegate: AnyObject {
 }
 
 import UIKit
-import GoogleMobileAds
 
 final class SearchVC: UIViewController {
     
@@ -47,7 +46,6 @@ final class SearchVC: UIViewController {
     private var inSearchMode = false
     weak var delegate: SearchVCDelegate?
     var isUp = false
-    var interstitial: GADInterstitial!
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()

@@ -104,7 +104,7 @@ extension Property {
             }
         }
         // FIXME
-        if let url = URL(string: "https://www.apple.com") {
+        if let url = URL(string: "https://apps.apple.com/us/app/paddy-la/id1496557533") {
             return [url, string]
         } else {
             return [string]
