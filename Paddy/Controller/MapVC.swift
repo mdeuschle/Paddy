@@ -15,7 +15,7 @@ final class MapVC: UIViewController {
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var searchVCHeight: NSLayoutConstraint!
     
-    let spinner = UIActivityIndicatorView(style: .gray)
+    let spinner = UIActivityIndicatorView(style: .whiteLarge)
     let propertyStore = PropertyStore()
     var properties = [Property]() {
         didSet {
