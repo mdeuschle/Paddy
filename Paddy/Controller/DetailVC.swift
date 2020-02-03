@@ -17,7 +17,7 @@ final class DetailVC: UITableViewController {
     
     lazy var bannerView: GADBannerView = {
         let bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
-        bannerView.adUnitID = "ca-app-pub-4242338858452610/1271792219"
+        bannerView.adUnitID = "ca-app-pub-4242338858452610/3741814942"
         bannerView.delegate = self
         bannerView.rootViewController = self
         return bannerView
